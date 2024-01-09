@@ -5,7 +5,6 @@ import 'dart:ffi';
 import 'package:app_7_ads/constes/ColorManager.dart';
 import 'package:app_7_ads/controller/home_controller.dart';
 import 'package:app_7_ads/widgets/appBar.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

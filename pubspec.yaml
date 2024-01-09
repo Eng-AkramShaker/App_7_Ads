@@ -42,7 +42,7 @@ dependencies:
   #
 
   firebase_core:
-  cloud_firestore:
+  # cloud_firestore:
   firebase_auth:
 
 dev_dependencies:
