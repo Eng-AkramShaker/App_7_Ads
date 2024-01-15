@@ -1,3 +1,7 @@
 {
-  "cSpell.words": ["constes"]
+  "cSpell.words": [
+    "autofocus",
+    "constes"
+  ],
+  "java.configuration.updateBuildConfiguration": "automatic"
 }
