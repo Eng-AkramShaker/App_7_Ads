@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../constes/ColorManager.dart';
+import '../constes/colormanager.dart';
 
 custom_Container(
     {required double h,
@@ -11,7 +11,8 @@ custom_Container(
     double? l,
     double? t,
     double? b,
-    double? size_icon}) {
+    double? size_icon,
+    var icon}) {
   return Padding(
       padding: EdgeInsets.only(
           right: r ?? 8, left: l ?? 0, top: t ?? 0, bottom: b ?? 0),
@@ -30,8 +31,8 @@ custom_Container(
               ),
             ]),
         child: Icon(
-          Icons.arrow_back_ios_sharp,
-          color: ColorManager.b_69,
+          icon ?? Icons.arrow_back_ios_sharp,
+          color: ColorManager.b_A0,
           size: size_icon ?? 20,
         ),
       ));

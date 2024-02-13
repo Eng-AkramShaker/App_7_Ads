@@ -6,6 +6,6 @@ class ColorManager {
   static const Color w_color = Colors.white;
   static const Color w_FA = Color(0xFFE4F0FA);
   static const Color w_F8 = Color(0xFFE6EEF8);
-  static const Color b_69 = Color(0xFF334669);
+  static const Color b_69 = Color(0xFFCD8A9A);
   static const Color b_A0 = Color(0xFF6E81A0);
 }

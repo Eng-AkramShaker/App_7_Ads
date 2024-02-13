@@ -1,10 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api, unnecessary_import, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
-import '../../constes/ColorManager.dart';
+import 'package:provider/provider.dart';
+import '../../constes/colormanager.dart';
+import '../../constes/navigators.dart';
 import '../../controller/home_controller.dart';
 import '../../widgets/custom_container.dart';
 
@@ -16,17 +15,22 @@ class Otp extends StatefulWidget {
 }
 
 class _OtpState extends State<Otp> {
-  final crl_home = Get.find<Controller_Home>();
-
   @override
   void initState() {
     super.initState();
+    ints(context);
+  }
 
-    crl_home.PhoneAuth();
+  ints(context) {
+    final crl_Home = Provider.of<Controller_Home>(context, listen: false);
+
+    crl_Home.PhoneAuth();
   }
 
   @override
   Widget build(BuildContext context) {
+    final crl_Home = Provider.of<Controller_Home>(context, listen: false);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: ColorManager.w_FA,
@@ -41,7 +45,7 @@ class _OtpState extends State<Otp> {
                   child: InkWell(
                     onTap: () {
                       //
-                      Get.back();
+                      pop(context);
                     },
                     child: custom_Container(h: 45, w: 45.0),
                   ),
@@ -113,16 +117,13 @@ class _OtpState extends State<Otp> {
                           onPressed: () {
                             //
                             setState(() {
-                              crl_home.verif_Id = '';
+                              crl_Home.verif_Id = '';
                             });
                           },
                           style: ButtonStyle(
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ColorManager.b_69),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
+                            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                            backgroundColor: MaterialStateProperty.all<Color>(ColorManager.b_69),
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(24.0),
                               ),
@@ -196,12 +197,9 @@ class _OtpState extends State<Otp> {
           decoration: InputDecoration(
             counter: const Offstage(),
             enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(width: 2, color: Colors.black12),
-                borderRadius: BorderRadius.circular(12)),
+                borderSide: const BorderSide(width: 2, color: Colors.black12), borderRadius: BorderRadius.circular(12)),
             focusedBorder: OutlineInputBorder(
-                borderSide:
-                    const BorderSide(width: 2, color: ColorManager.b_69),
-                borderRadius: BorderRadius.circular(12)),
+                borderSide: const BorderSide(width: 2, color: ColorManager.b_69), borderRadius: BorderRadius.circular(12)),
           ),
         ),
       ),
