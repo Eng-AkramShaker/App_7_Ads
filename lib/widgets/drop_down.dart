@@ -24,6 +24,8 @@ class Drop_Down extends StatefulWidget {
 class _Drop_DownState extends State<Drop_Down> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Center(
       child: DropdownButtonHideUnderline(
         child: DropdownButton2<String>(
@@ -71,7 +73,7 @@ class _Drop_DownState extends State<Drop_Down> {
           },
           buttonStyleData: ButtonStyleData(
             height: 50,
-            width: 160,
+            width: size.width / 2.3,
             padding: const EdgeInsets.only(left: 14, right: 14),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14),
@@ -90,13 +92,13 @@ class _Drop_DownState extends State<Drop_Down> {
           ),
           underline: Container(),
           dropdownStyleData: DropdownStyleData(
-            maxHeight: 200,
-            width: 200,
+            maxHeight: size.height / 3,
+            width: size.width / 2.3,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14),
               color: ColorManager.w_FA,
             ),
-            offset: const Offset(-20, 0),
+            offset: const Offset(0, 0),
             scrollbarTheme: ScrollbarThemeData(
               radius: const Radius.circular(40),
               thickness: MaterialStateProperty.all(6),

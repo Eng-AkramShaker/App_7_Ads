@@ -1,6 +1,6 @@
 // // ignore_for_file: depend_on_referenced_packages, unused_import, library_private_types_in_public_api
 
-// ignore_for_file: depend_on_referenced_packages
+// ignore_for_file: depend_on_referenced_packages, unused_local_variable
 
 import 'package:app7ads/screens/home/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -33,6 +33,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return ChangeNotifierProvider(
       create: (ctx) => Controller_Home(),
       child: const MaterialApp(
