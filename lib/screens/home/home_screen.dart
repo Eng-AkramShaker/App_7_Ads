@@ -1,7 +1,14 @@
 // ignore_for_file: avoid_print, unused_field, sized_box_for_whitespace, camel_case_types, must_be_immutable, non_constant_identifier_names, prefer_const_constructors_in_immutables, use_key_in_widget_constructors, unused_local_variable
 
 import 'package:app7ads/screens/profile/profile_screen.dart';
+import 'package:app7ads/widgets/card/card_adsense.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/colors/gf_color.dart';
+import 'package:getwidget/components/avatar/gf_avatar.dart';
+import 'package:getwidget/components/button/gf_button_bar.dart';
+import 'package:getwidget/components/card/gf_card.dart';
+import 'package:getwidget/components/list_tile/gf_list_tile.dart';
+import 'package:getwidget/position/gf_position.dart';
 import 'package:motion_tab_bar/MotionBadgeWidget.dart';
 import 'package:motion_tab_bar/MotionTabBar.dart';
 import 'package:motion_tab_bar/MotionTabBarController.dart';
@@ -104,8 +111,8 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
           tabIconSize: 28.0,
           tabIconSelectedSize: 26.0,
           tabSelectedColor: Colors.blue[900],
-          tabIconSelectedColor: Colors.white,
-          tabBarColor: Colors.white,
+          tabIconSelectedColor: ColorManager.w_FA,
+          tabBarColor: ColorManager.w_FA,
           onTabItemSelected: (int value) {
             setState(() {
               _motionTabBarController!.index = value;
@@ -158,7 +165,7 @@ class _MainPageContentComponentState extends State<MainPageContentComponent> {
           height: double.infinity,
           width: double.infinity,
           decoration: const BoxDecoration(
-            color: ColorManager.w_F8,
+            color: ColorManager.w_color,
           ),
           child: Column(
             children: [
@@ -226,10 +233,11 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final crlHome = Provider.of<Controller_Home>(context, listen: false);
+    Size size = MediaQuery.of(context).size;
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: ColorManager.w_FA,
+        backgroundColor: ColorManager.w_color,
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
@@ -272,14 +280,14 @@ class HomePageState extends State<HomePage> {
                 centerTitle: true,
                 titlePadding: const EdgeInsets.symmetric(vertical: 8),
                 title: Container(
-                  width: 250,
-                  height: 40,
+                  width: size.width / 2,
+                  height: 38,
                   alignment: Alignment.center,
                   child: TextField(
                     style: const TextStyle(fontSize: 13),
                     decoration: InputDecoration(
                       hintText: "البحث ...... ",
-                      fillColor: Colors.white,
+                      fillColor: ColorManager.w_FA,
                       filled: true,
                       suffixIcon: const Icon(Icons.search),
                       enabledBorder: OutlineInputBorder(
@@ -317,18 +325,20 @@ class HomePageState extends State<HomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    //
+
                     Container(
-                      height: 300,
+                      height: size.height / 1.1,
                       width: double.maxFinite,
                       child: ListView.builder(
-                        itemCount: 5,
+                        itemCount: 10,
                         itemBuilder: (BuildContext context, int index) {
-                          return const Card(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('uuuuu'),
-                              ],
+                          return Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: card_Ads(
+                              'https://hips.hearstapps.com/hmg-prod/images/2022-ford-e-transit-supervan-33-1655992304.jpg?crop=0.673xw:0.793xh;0.196xw,0.156xh&resize=980:*',
+                              'Ford Pro Electric SuperVan',
+                              'Ford says the Electric SuperVan can sprint to 60 mph',
                             ),
                           );
                         },
