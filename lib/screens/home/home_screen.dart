@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print, unused_field, sized_box_for_whitespace, camel_case_types, must_be_immutable, non_constant_identifier_names, prefer_const_constructors_in_immutables, use_key_in_widget_constructors, unused_local_variable
 
+import 'package:app7ads/screens/favourites/favourites_screen.dart';
 import 'package:app7ads/screens/profile/profile_screen.dart';
 import 'package:app7ads/widgets/card/card_adsense.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ import '../../constes/colormanager.dart';
 import '../../controller/home_controller.dart';
 import '../../widgets/custom_container.dart';
 import '../../widgets/drop_down.dart';
+import '../contact_us/contact_us.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -33,8 +35,8 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _motionTabBarController = MotionTabBarController(
-      initialIndex: 3,
-      length: 4,
+      initialIndex: 4,
+      length: 5,
       vsync: this,
     );
   }
@@ -55,81 +57,130 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
       // ),
       bottomNavigationBar: Directionality(
         textDirection: TextDirection.ltr,
-        child: MotionTabBar(
-          controller: _motionTabBarController, // Add this controller if you need to change your tab programmatically
-          initialSelectedTab: "Home",
-          useSafeArea: true, // default: true, apply safe area wrapper
-          labels: const ["Dashboard", "Settings", "Profile", "Home"],
-          icons: const [
-            Icons.dashboard,
-            Icons.settings,
-            Icons.people_alt,
-            Icons.home,
-          ],
+        child: BottomAppBar(
+          elevation: 0,
 
-          // optional badges, length must be same with labels
-          badges: [
-            // Default Motion Badge Widget
-            const MotionBadgeWidget(
-              text: '10+',
-              textColor: Colors.white, // optional, default to Colors.white
-              color: Colors.red, // optional, default to Colors.red
-              size: 18, // optional, default to 18
-            ),
+          height: MediaQuery.of(context).size.height * 0.1,
+          clipBehavior: Clip.none,
+          shape: CircularNotchedRectangle(),
+          notchMargin: 5.0,
+          color: ColorManager.w_FA,
 
-            // allow null
-            null,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: MotionTabBar(
 
-            // Default Motion Badge Widget with indicator only
-            const MotionBadgeWidget(
-              isIndicator: true,
-              color: Colors.red, // optional, default to Colors.red
-              size: 5, // optional, default to 5,
-              show: true, // true / false
-            ),
-            // custom badge Widget
-            Container(
-              color: Colors.black,
-              padding: const EdgeInsets.all(2),
-              child: const Text(
-                '48',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
+
+              controller: _motionTabBarController, // Add this controller if you need to change your tab programmatically
+              initialSelectedTab: "Home",
+              useSafeArea: true, // default: true, apply safe area wrapper
+              labels: const ["Dashboard","favourites", "Settings", "Profile", "Home"],
+              icons: const [
+                Icons.dashboard,
+                Icons.favorite_border,
+                Icons.settings,
+                // Icons.settings,
+                Icons.people_alt,
+                Icons.home,
+              ],
+
+              // optional badges, length must be same with labels
+              badges: [
+                // Default Motion Badge Widget
+                const MotionBadgeWidget(
+                  text: '10+',
+                  textColor: Colors.white, // optional, default to Colors.white
+                  color: Colors.red, // optional, default to Colors.red
+                  size: 18, // optional, default to 18
                 ),
+                const MotionBadgeWidget(
+                  text: '7+',
+                  textColor: Colors.white, // optional, default to Colors.white
+                  color: Colors.red, // optional, default to Colors.red
+                  size: 18, // optional, default to 18
+                ),
+
+                // allow null
+                null,
+                // null,
+
+                // Default Motion Badge Widget with indicator only
+                const MotionBadgeWidget(
+                  isIndicator: true,
+                  color: Colors.red, // optional, default to Colors.red
+                  size: 5, // optional, default to 5,
+                  show: true, // true / false
+                ),
+                // custom badge Widget
+                Container(
+                  color: Colors.black,
+                  padding: const EdgeInsets.all(2),
+                  child: const Text(
+                    '48',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+
+              tabSize: 50,
+              tabBarHeight: 55,
+              textStyle: const TextStyle(
+                fontSize: 12,
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
               ),
+              tabIconColor: Colors.blue[600],
+              tabIconSize: 28.0,
+              tabIconSelectedSize: 26.0,
+              tabSelectedColor: Colors.blue[900],
+              tabIconSelectedColor: ColorManager.w_FA,
+              tabBarColor: ColorManager.w_FA,
+              onTabItemSelected: (int value) {
+                setState(() {
+                  _motionTabBarController!.index = value;
+                });
+              },
+
             ),
-          ],
-          tabSize: 50,
-          tabBarHeight: 55,
-          textStyle: const TextStyle(
-            fontSize: 12,
-            color: Colors.black,
-            fontWeight: FontWeight.w500,
           ),
-          tabIconColor: Colors.blue[600],
-          tabIconSize: 28.0,
-          tabIconSelectedSize: 26.0,
-          tabSelectedColor: Colors.blue[900],
-          tabIconSelectedColor: ColorManager.w_FA,
-          tabBarColor: ColorManager.w_FA,
-          onTabItemSelected: (int value) {
-            setState(() {
-              _motionTabBarController!.index = value;
-            });
-          },
         ),
       ),
       body: TabBarView(
+
         physics: const NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
         controller: _motionTabBarController,
         children: [
-          MainPageContentComponent(title: "Dashboard Page", controller: _motionTabBarController!),
-          MainPageContentComponent(title: "Profile Page", controller: _motionTabBarController!),
+          ContactUsScreen(controller: _motionTabBarController!) ,
+          FavouritesScreen(controller: _motionTabBarController!) ,
+          MainPageContentComponent(title: "settings Page", controller: _motionTabBarController!),
           MyProfile(),
           HomePage(controller: _motionTabBarController!),
         ],
       ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: FloatingActionButton(
+          elevation: 5,
+          backgroundColor: ColorManager.b_69,
+          onPressed: () {
+
+          },
+          child: const Padding(
+            padding: EdgeInsets.only(
+              top: 5,
+              bottom: 5,
+            ),
+            child: Icon(Icons.add ,)
+          ),
+          // mini: true,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+
     );
   }
 }
@@ -175,18 +226,26 @@ class _MainPageContentComponentState extends State<MainPageContentComponent> {
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () => widget.controller.index = 0,
-                child: const Text('Dashboard Page'),
+                child: const Text('Contact US Page'),
               ),
               ElevatedButton(
                 onPressed: () => widget.controller.index = 1,
+                child: const Text('Favourite Page'),
+              ),
+              ElevatedButton(
+                onPressed: () => widget.controller.index = 2,
                 child: const Text('Home Page'),
               ),
               ElevatedButton(
                 onPressed: () => widget.controller.index = 2,
-                child: const Text('Profile Page'),
+                child: const Text('Home Page'),
               ),
               ElevatedButton(
                 onPressed: () => widget.controller.index = 3,
+                child: const Text('Profile Page'),
+              ),
+              ElevatedButton(
+                onPressed: () => widget.controller.index = 4,
                 child: const Text('Settings Page'),
               ),
             ],
