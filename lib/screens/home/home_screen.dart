@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print, unused_field, sized_box_for_whitespace, camel_case_types, must_be_immutable, non_constant_identifier_names, prefer_const_constructors_in_immutables, use_key_in_widget_constructors, unused_local_variable
 
+import 'package:app7ads/components/components.dart';
 import 'package:app7ads/screens/favourites/favourites_screen.dart';
 import 'package:app7ads/screens/profile/profile_screen.dart';
 import 'package:app7ads/widgets/card/card_adsense.dart';
@@ -18,6 +19,7 @@ import '../../constes/colormanager.dart';
 import '../../controller/home_controller.dart';
 import '../../widgets/custom_container.dart';
 import '../../widgets/drop_down.dart';
+import '../add_ads.dart';
 import '../contact_us/contact_us.dart';
 
 class Home extends StatefulWidget {
@@ -166,7 +168,7 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
           elevation: 5,
           backgroundColor: ColorManager.b_69,
           onPressed: () {
-
+navigateTo(context: context, widget: AddAds()) ;
           },
           child: const Padding(
             padding: EdgeInsets.only(

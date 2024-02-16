@@ -103,9 +103,8 @@ class CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 100,
+      height: widget.height??60,
       child: TextFormField(
-
 
         maxLength: widget.maxLength,
         validator: widget.validator,
@@ -127,6 +126,9 @@ class CustomTextFieldState extends State<CustomTextField> {
         // textAlign: (widget.centerText!) ? TextAlign.center : TextAlign.right,
         cursorColor: widget.cursorColor??Colors.white,
         decoration: InputDecoration(
+
+
+
           errorText: widget.errorText,
           counterText: '',
           hintText: widget.hintText,
@@ -150,6 +152,7 @@ class CustomTextFieldState extends State<CustomTextField> {
           focusedBorder: (!widget.hasBorder!)
               ? InputBorder.none
               : OutlineInputBorder(
+
               borderRadius: BorderRadius.circular(widget.radius),
               borderSide: BorderSide(width:0.5,color: widget.borderColor !=null ? widget.borderColor! : ColorManager.borderColor)),
           labelText: widget.lable,
