@@ -19,7 +19,7 @@ import '../../constes/colormanager.dart';
 import '../../controller/home_controller.dart';
 import '../../widgets/custom_container.dart';
 import '../../widgets/drop_down.dart';
-import '../add_ads.dart';
+import '../adsense/add_ads.dart';
 import '../contact_us/contact_us.dart';
 
 class Home extends StatefulWidget {
@@ -61,22 +61,18 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
         textDirection: TextDirection.ltr,
         child: BottomAppBar(
           elevation: 0,
-
           height: MediaQuery.of(context).size.height * 0.1,
           clipBehavior: Clip.none,
-          shape: CircularNotchedRectangle(),
+          shape: const CircularNotchedRectangle(),
           notchMargin: 5.0,
           color: ColorManager.w_FA,
-
           child: Padding(
             padding: const EdgeInsets.only(top: 15),
             child: MotionTabBar(
-
-
               controller: _motionTabBarController, // Add this controller if you need to change your tab programmatically
               initialSelectedTab: "Home",
               useSafeArea: true, // default: true, apply safe area wrapper
-              labels: const ["Dashboard","favourites", "Settings", "Profile", "Home"],
+              labels: const ["Dashboard", "favourites", "Settings", "Profile", "Home"],
               icons: const [
                 Icons.dashboard,
                 Icons.favorite_border,
@@ -145,20 +141,18 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
                   _motionTabBarController!.index = value;
                 });
               },
-
             ),
           ),
         ),
       ),
       body: TabBarView(
-
         physics: const NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
         controller: _motionTabBarController,
         children: [
-          ContactUsScreen(controller: _motionTabBarController!) ,
-          FavouritesScreen(controller: _motionTabBarController!) ,
+          ContactUsScreen(controller: _motionTabBarController!),
+          FavouritesScreen(controller: _motionTabBarController!),
           MainPageContentComponent(title: "settings Page", controller: _motionTabBarController!),
-          MyProfile(),
+          const MyProfile(),
           HomePage(controller: _motionTabBarController!),
         ],
       ),
@@ -168,21 +162,20 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
           elevation: 5,
           backgroundColor: ColorManager.b_69,
           onPressed: () {
-navigateTo(context: context, widget: AddAds()) ;
+            navigateTo(context: context, widget: AddAds());
           },
           child: const Padding(
-            padding: EdgeInsets.only(
-              top: 5,
-              bottom: 5,
-            ),
-            child: Icon(Icons.add ,)
-          ),
+              padding: EdgeInsets.only(
+                top: 5,
+                bottom: 5,
+              ),
+              child: Icon(
+                Icons.add,
+              )),
           // mini: true,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-
-
     );
   }
 }
