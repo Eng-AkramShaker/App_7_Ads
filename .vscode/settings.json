@@ -13,5 +13,6 @@
     "البحث",
     "المحافظة",
     "المحافظه"
-  ]
+  ],
+  "java.compile.nullAnalysis.mode": "automatic"
 }
