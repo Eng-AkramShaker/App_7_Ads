@@ -14,5 +14,8 @@
     "المحافظة",
     "المحافظه"
   ],
-  "java.compile.nullAnalysis.mode": "automatic"
+  "java.compile.nullAnalysis.mode": "automatic", 
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  }
 }
