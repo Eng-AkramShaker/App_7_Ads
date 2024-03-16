@@ -24,6 +24,7 @@ class _AddAdsState extends State<AddAds> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const CustomText(
           text: 'اضافة اعلان',
@@ -33,7 +34,7 @@ class _AddAdsState extends State<AddAds> {
         ),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: ColorManager.b_69.withOpacity(0.9),
+        backgroundColor: Colors.white,
       ),
       body: Column(
         children: [
@@ -50,7 +51,7 @@ class _AddAdsState extends State<AddAds> {
               text: 'اضف الاعلان',
               onTap: () {},
               width: double.infinity,
-              color: ColorManager.b_69,
+              color: ColorManager.primary,
               textcolor: ColorManager.w_color,
               textSize: 20,
               height: MediaQuery.of(context).size.height * 0.09,

@@ -17,7 +17,7 @@ class BuildTextBody extends StatelessWidget {
           width: double.infinity,
           decoration: BoxDecoration(
             border: Border.all(
-              color: ColorManager.b_69,
+              color: ColorManager.primary,
               width: 0.5,
             ),
             borderRadius: BorderRadius.circular(15),
@@ -29,7 +29,7 @@ class BuildTextBody extends StatelessWidget {
                 Text(
                   title,
                   style: const TextStyle(
-                    color: ColorManager.b_69,
+                    color: ColorManager.grayColor,
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                   ),
@@ -38,7 +38,7 @@ class BuildTextBody extends StatelessWidget {
                 Icon(
                   icon,
                   size: 30,
-                  color: ColorManager.b_69,
+                  color: ColorManager.primary,
                 ),
                 const SizedBox(width: 10.0),
                 const Text(' : '),
@@ -60,7 +60,7 @@ class BuildTextBody extends StatelessWidget {
         const Text(
           ' *للشكاوي والاقتراحات*',
           style: TextStyle(
-            color: ColorManager.b_69,
+            color: ColorManager.primary,
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -75,7 +75,7 @@ class BuildTextBody extends StatelessWidget {
         const Text(
           ' *لارسال الصور والمرفقات*',
           style: TextStyle(
-            color: ColorManager.b_69,
+            color: ColorManager.primary,
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -89,7 +89,7 @@ class BuildTextBody extends StatelessWidget {
         const SizedBox(height: 10),
         const Text(
           'تابعنا علي وسائل التواصل الاجتماعي :',
-          style: TextStyle(color: ColorManager.b_69, fontSize: 15),
+          style: TextStyle(color: ColorManager.grayColor, fontSize: 15),
         ),
         const SizedBox(height: 5.0),
       ],

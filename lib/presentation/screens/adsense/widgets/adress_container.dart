@@ -5,7 +5,7 @@ import 'package:todotask/utils/constants/ColorManager.dart';
 
 // ignore: must_be_immutable
 class AdressContainer extends StatelessWidget {
-   AdressContainer({super.key});
+  AdressContainer({super.key});
   var addressController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -16,20 +16,20 @@ class AdressContainer extends StatelessWidget {
         centerText: true,
         lableStyle: const TextStyle(
           fontSize: 15,
-          color: ColorManager.b_69,
+          color: ColorManager.grayColor,
         ),
         lable: ' العنوان  ',
         controller: addressController,
-        borderColor: ColorManager.b_69,
+        borderColor: ColorManager.primary,
         hasBorder: true,
         radius: 10,
-        style: const TextStyle(color: ColorManager.b_69, fontSize: 15),
+        style: const TextStyle(color: Colors.black, fontSize: 20),
         textInputType: TextInputType.text,
         icon: const Padding(
           padding: EdgeInsets.only(left: 10, right: 10),
           child: CircleAvatar(
             radius: 15,
-            backgroundColor: ColorManager.b_69,
+            backgroundColor: ColorManager.primary,
             child: Icon(
               Icons.place,
               color: ColorManager.w_color,

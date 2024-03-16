@@ -139,10 +139,10 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
                 ),
-                tabIconColor: Colors.blue[600],
+                tabIconColor: Colors.white,
                 tabIconSize: 28.0,
                 tabIconSelectedSize: 26.0,
-                tabSelectedColor: Colors.blue[900],
+                tabSelectedColor: Colors.white,
                 tabIconSelectedColor: ColorManager.primary,
                 tabBarColor: ColorManager.primary,
                 onTabItemSelected: (int value) {

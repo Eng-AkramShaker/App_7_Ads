@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:todotask/presentation/widgets/custom_tex2.dart';
 import 'package:todotask/utils/constants/ColorManager.dart';
 
-
 class infoItem extends StatelessWidget {
   infoItem({
     required this.infoKey,
@@ -18,7 +17,7 @@ class infoItem extends StatelessWidget {
       children: [
         CustomText(
           text: infoKey!,
-          color: ColorManager.w_color,
+          color: ColorManager.primary,
           fontSize: 13,
           fontWeight: FontWeight.bold,
         ),
@@ -27,7 +26,7 @@ class infoItem extends StatelessWidget {
         ),
         CustomText(
           text: infoValue!,
-          color: ColorManager.w_color,
+          color: ColorManager.primary,
           fontWeight: FontWeight.bold,
           fontSize: 13,
         ),

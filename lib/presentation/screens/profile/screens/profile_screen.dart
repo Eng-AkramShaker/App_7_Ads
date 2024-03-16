@@ -21,7 +21,7 @@ class _MyProfileState extends State<MyProfile> {
         appBar: AppBar(
           centerTitle: true,
           elevation: 0,
-          backgroundColor: ColorManager.b_69.withOpacity(0.9),
+          backgroundColor: Colors.white,
           title: const CustomText(
             text: 'حـسـابـي',
             fontSize: 20,
@@ -32,9 +32,9 @@ class _MyProfileState extends State<MyProfile> {
         body: Column(
           children: [
             Container(
-              decoration: BoxDecoration(
-                  color: ColorManager.b_69.withOpacity(0.9),
-                  borderRadius: const BorderRadius.only(
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(40),
                       bottomRight: Radius.circular(40))),
               child: const Column(

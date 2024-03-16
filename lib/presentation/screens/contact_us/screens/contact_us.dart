@@ -26,9 +26,10 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
               Container(
                 width: double.infinity,
                 height: size.height * 0.35,
-                decoration: const BoxDecoration(
-                    color: ColorManager.b_69,
-                    borderRadius: BorderRadius.only(
+                decoration: BoxDecoration(
+                    border: Border.all(color: ColorManager.primary),
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.only(
                         bottomRight: Radius.circular(72),
                         bottomLeft: Radius.circular(72))),
                 child: Center(
@@ -48,7 +49,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       const Text(
                         'تواصل معنا',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: ColorManager.primary,
                           fontWeight: FontWeight.w600,
                           fontSize: 30,
                         ),

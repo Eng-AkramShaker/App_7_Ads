@@ -14,7 +14,7 @@ class AddAdsPicture extends StatelessWidget {
         width: double.infinity,
         height: MediaQuery.of(context).size.height * 0.2,
         decoration: BoxDecoration(
-          border: Border.all(color: ColorManager.b_69, width: 2),
+          border: Border.all(color: ColorManager.primary, width: 2),
           borderRadius: BorderRadius.circular(20),
         ),
         child: const Column(
@@ -22,15 +22,15 @@ class AddAdsPicture extends StatelessWidget {
           children: [
             CustomText(
               text: 'أضف صورة الاعلان',
-              fontSize: 12,
+              fontSize: 15,
               fontWeight: FontWeight.bold,
-              color: ColorManager.b_69,
+              color: ColorManager.grayColor,
             ),
             SizedBox(
               height: 10,
             ),
             CircleAvatar(
-                backgroundColor: ColorManager.b_69,
+                backgroundColor: ColorManager.primary,
                 child: Icon(
                   Icons.add,
                   color: ColorManager.w_color,

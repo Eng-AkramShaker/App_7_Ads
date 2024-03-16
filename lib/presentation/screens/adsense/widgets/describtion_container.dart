@@ -5,7 +5,7 @@ import 'package:todotask/utils/constants/ColorManager.dart';
 
 // ignore: must_be_immutable
 class DescribtionContainer extends StatelessWidget {
-   DescribtionContainer({super.key});
+  DescribtionContainer({super.key});
   var descriptionController = TextEditingController();
 
   @override
@@ -16,20 +16,20 @@ class DescribtionContainer extends StatelessWidget {
         centerText: true,
         lableStyle: const TextStyle(
           fontSize: 15,
-          color: ColorManager.b_69,
+          color: ColorManager.grayColor,
         ),
         lable: 'وصف الاعلان ',
         controller: descriptionController,
-        borderColor: ColorManager.b_69,
+        borderColor: ColorManager.primary,
         hasBorder: true,
         radius: 10,
-        style: const TextStyle(color: ColorManager.b_69, fontSize: 15),
+        style: const TextStyle(color: Colors.black, fontSize: 15),
         textInputType: TextInputType.text,
         icon: const Padding(
           padding: EdgeInsets.only(left: 10, right: 10),
           child: CircleAvatar(
             radius: 15,
-            backgroundColor: ColorManager.b_69,
+            backgroundColor: ColorManager.primary,
             child: Icon(
               Icons.text_fields,
               color: ColorManager.w_color,

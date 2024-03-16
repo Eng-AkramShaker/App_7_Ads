@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:todotask/presentation/widgets/custom_tex2.dart';
 import 'package:todotask/utils/constants/ColorManager.dart';
 
@@ -12,8 +13,9 @@ class PointsContainer extends StatelessWidget {
       height: size.height * 0.26,
       width: size.width * 0.35,
       decoration: BoxDecoration(
+        border: Border.all(color: ColorManager.primary),
         borderRadius: BorderRadius.circular(30),
-        color: ColorManager.b_69,
+        color: Colors.white,
       ),
       child: const Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

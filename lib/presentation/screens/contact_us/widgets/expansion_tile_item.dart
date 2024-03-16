@@ -13,7 +13,7 @@ class ExpansionTileSubjectItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10),
+      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
       child: ExpansionTileBorderItem(
         trailing: const Icon(
           Icons.arrow_drop_down,
@@ -31,9 +31,13 @@ class ExpansionTileSubjectItem extends StatelessWidget {
             ),
           ],
           borderRadius: BorderRadius.circular(16),
-          color: ColorManager.b_69,
+          color: ColorManager.primary,
         ),
-        title: const CustomText(text: 'الشروط والاحكام', color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+        title: const CustomText(
+            text: 'الشروط والاحكام',
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold),
         expendedBorderColor: Colors.black,
         iconColor: ColorManager.b_69,
         collapsedIconColor: ColorManager.b_69,
@@ -49,7 +53,8 @@ class ExpansionTileSubjectItem extends StatelessWidget {
                         children: [
                           CustomText(
                             color: Colors.white,
-                            text: 'يجب ان تفهم شروط التطبيق جيدا قبل الاستخدام :',
+                            text:
+                                'يجب ان تفهم شروط التطبيق جيدا قبل الاستخدام :',
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                           ),
@@ -62,58 +67,77 @@ class ExpansionTileSubjectItem extends StatelessWidget {
                     scrollDirection: Axis.vertical,
                     children: const [
                       CustomText(
-                          text: '1- أن لا يكون الإعلان منافي للآداب العامة ', color: ColorManager.w_color, maxLines: 2, fontSize: 15),
-                      CustomText(
-                          text: '2- عدم إنتهاك خصوصية الآخرين وبياناتهم', color: ColorManager.w_color, maxLines: 2, fontSize: 15),
-                      CustomText(
-                          text: '3- أن لا يكون الإعلان خادش للحياء وأن يكون خالي من الإيحاءات الجنسية',
+                          text: '1- أن لا يكون الإعلان منافي للآداب العامة ',
                           color: ColorManager.w_color,
                           maxLines: 2,
                           fontSize: 15),
                       CustomText(
-                          text: '4- أن لا يتضمن العنف والإرهاب والإيزاء النفسي والجسدي ',
+                          text: '2- عدم إنتهاك خصوصية الآخرين وبياناتهم',
                           color: ColorManager.w_color,
                           maxLines: 2,
                           fontSize: 15),
                       CustomText(
-                          text: '5- عدم إزدراء الأديان والمذاهب والمعتقدات', color: ColorManager.w_color, maxLines: 2, fontSize: 15),
-                      CustomText(
-                          text: '6- كتابة كافة التفاصيل والسعر والوصف والحالة للمنتج داخل الإعلان',
+                          text:
+                              '3- أن لا يكون الإعلان خادش للحياء وأن يكون خالي من الإيحاءات الجنسية',
                           color: ColorManager.w_color,
                           maxLines: 2,
                           fontSize: 15),
                       CustomText(
-                          text: '7- أن لا يكون الإعلان وهميٱ أو منتج غير موجود ',
+                          text:
+                              '4- أن لا يتضمن العنف والإرهاب والإيزاء النفسي والجسدي ',
                           color: ColorManager.w_color,
                           maxLines: 2,
                           fontSize: 15),
                       CustomText(
-                          text: '8- أن لا يكون الإعلان عن نشاط ترويجي للمخدرات أو التشجيع عليها',
+                          text: '5- عدم إزدراء الأديان والمذاهب والمعتقدات',
                           color: ColorManager.w_color,
                           maxLines: 2,
                           fontSize: 15),
                       CustomText(
-                          text: '9- إقرار المعلن أو المستخدم بمسؤليته عن المخالفات القانونية و العواقب الإجتماعية',
+                          text:
+                              '6- كتابة كافة التفاصيل والسعر والوصف والحالة للمنتج داخل الإعلان',
                           color: ColorManager.w_color,
                           maxLines: 2,
                           fontSize: 15),
                       CustomText(
-                          text: '10- أن لا يتضمن الإعلان التشهير الإيزاء لأي شخص أو نشاط',
+                          text:
+                              '7- أن لا يكون الإعلان وهميٱ أو منتج غير موجود ',
                           color: ColorManager.w_color,
                           maxLines: 2,
                           fontSize: 15),
                       CustomText(
-                          text: '11- الإقرار باستخدام رقم هاتف شخصي او شركات حقيقي وإمتلاكه رسمياً',
+                          text:
+                              '8- أن لا يكون الإعلان عن نشاط ترويجي للمخدرات أو التشجيع عليها',
                           color: ColorManager.w_color,
                           maxLines: 2,
                           fontSize: 15),
                       CustomText(
-                          text: '12- عدم التلاعب أو استخدام أي روبوت أو زكاء إصطناعي داخل التطبيق',
+                          text:
+                              '9- إقرار المعلن أو المستخدم بمسؤليته عن المخالفات القانونية و العواقب الإجتماعية',
                           color: ColorManager.w_color,
                           maxLines: 2,
                           fontSize: 15),
                       CustomText(
-                          text: '13- البرنامج غير مسؤول نهائيا عن الإعلان ومحتواه أو زيادة أو تقليل الأرباح بشكل مباشر أو غير مباشر',
+                          text:
+                              '10- أن لا يتضمن الإعلان التشهير الإيزاء لأي شخص أو نشاط',
+                          color: ColorManager.w_color,
+                          maxLines: 2,
+                          fontSize: 15),
+                      CustomText(
+                          text:
+                              '11- الإقرار باستخدام رقم هاتف شخصي او شركات حقيقي وإمتلاكه رسمياً',
+                          color: ColorManager.w_color,
+                          maxLines: 2,
+                          fontSize: 15),
+                      CustomText(
+                          text:
+                              '12- عدم التلاعب أو استخدام أي روبوت أو زكاء إصطناعي داخل التطبيق',
+                          color: ColorManager.w_color,
+                          maxLines: 2,
+                          fontSize: 15),
+                      CustomText(
+                          text:
+                              '13- البرنامج غير مسؤول نهائيا عن الإعلان ومحتواه أو زيادة أو تقليل الأرباح بشكل مباشر أو غير مباشر',
                           color: ColorManager.w_color,
                           maxLines: 2,
                           fontSize: 15),

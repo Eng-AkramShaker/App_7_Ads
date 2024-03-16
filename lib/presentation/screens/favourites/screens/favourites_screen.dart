@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:motion_tab_bar/MotionTabBarController.dart';
+import 'package:todotask/presentation/widgets/item_card.dart';
 import 'package:todotask/utils/constants/ColorManager.dart';
 import '../widgets/card_adsense.dart';
 
@@ -18,8 +19,12 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ColorManager.b_69,
-        title: const Text('Favourites'),
+        backgroundColor: Colors.white,
+        title: const Text(
+          'Favourites',
+          style: TextStyle(
+              color: ColorManager.primary, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -42,7 +47,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
         itemCount: 10,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(5),
             child: _buildFavouriteCard(),
           );
         },
@@ -51,10 +56,6 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
   }
 
   Widget _buildFavouriteCard() {
-    return cardFav_Ads(
-      'https://hips.hearstapps.com/hmg-prod/images/2022-ford-e-transit-supervan-33-1655992304.jpg?crop=0.673xw:0.793xh;0.196xw,0.156xh&resize=980:*',
-      'Ford Pro Electric SuperVan',
-      'Ford says the Electric SuperVan can sprint to 60 mph',
-    );
+    return const ItemCard();
   }
 }
