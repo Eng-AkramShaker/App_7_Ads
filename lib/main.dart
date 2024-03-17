@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:todotask/data/model/cart.dart';
 import 'package:todotask/presentation/screens/splash/splash_screen.dart';
 import 'utils/controller/home_controller.dart';
 import 'data/firebase_options.dart';
@@ -24,6 +25,7 @@ void main() async {
 
 final List<SingleChildWidget> providers = [
   ChangeNotifierProvider(create: (ctx) => Controller_Home()),
+  ChangeNotifierProvider(create: (ctx) => Cart()),
 ];
 
 class MyApp extends StatefulWidget {

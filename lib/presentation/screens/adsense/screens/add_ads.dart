@@ -24,7 +24,7 @@ class _AddAdsState extends State<AddAds> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xfffbfcfc),
       appBar: AppBar(
         title: const CustomText(
           text: 'اضافة اعلان',
@@ -36,29 +36,52 @@ class _AddAdsState extends State<AddAds> {
         elevation: 0,
         backgroundColor: Colors.white,
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 20),
-          const AddAdsPicture(),
-          const SizedBox(height: 30),
-          AdressContainer(),
-          const SizedBox(height: 20),
-          DescribtionContainer(),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: customButton(
-              text: 'اضف الاعلان',
-              onTap: () {},
-              width: double.infinity,
-              color: ColorManager.primary,
-              textcolor: ColorManager.w_color,
-              textSize: 20,
-              height: MediaQuery.of(context).size.height * 0.09,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            const AddAdsPicture(),
+            const SizedBox(height: 30),
+            CustomContainer(
+              text: 'العنوان',
+              icon: Icons.place,
             ),
-          ),
-          const SizedBox(height: 10),
-        ],
+            const SizedBox(height: 20),
+            CustomContainer(
+              text: 'وصف الاعلان ',
+              icon: Icons.description,
+            ),
+            const SizedBox(height: 20),
+            CustomContainer(
+              text: ' اسم المنتج ',
+              icon: Icons.text_fields,
+            ),
+            const SizedBox(height: 20),
+            CustomContainer(
+              text: ' سعر المنتج ',
+              icon: Icons.price_check_outlined,
+            ),
+            const SizedBox(height: 20),
+            CustomContainer(
+              text: 'موديل  المنتج ',
+              icon: Icons.category,
+            ),
+            SizedBox(height: .1 * MediaQuery.sizeOf(context).width),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: customButton(
+                text: 'اضف الاعلان',
+                onTap: () {},
+                width: double.infinity,
+                color: ColorManager.primary,
+                textcolor: ColorManager.w_color,
+                textSize: 20,
+                height: MediaQuery.of(context).size.height * 0.09,
+              ),
+            ),
+            const SizedBox(height: 10),
+          ],
+        ),
       ),
     );
   }

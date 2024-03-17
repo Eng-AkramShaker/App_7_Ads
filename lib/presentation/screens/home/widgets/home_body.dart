@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:motion_tab_bar/MotionTabBarController.dart';
 import 'package:provider/provider.dart';
+import 'package:todotask/data/model/cart.dart';
+import 'package:todotask/data/model/product.dart';
 import 'package:todotask/presentation/screens/home/widgets/custom_container.dart';
 import 'package:todotask/presentation/screens/home/widgets/drop_down.dart';
 import 'package:todotask/presentation/screens/home/widgets/search_container.dart';
@@ -38,7 +40,12 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final crlHome = Provider.of<Controller_Home>(context, listen: false);
     Size size = MediaQuery.of(context).size;
-
+    List<Item> items = [
+      Item('Ultra', 250),
+      Item('30pro', 3000),
+      Item('Samsong', 270),
+      Item('hawawi', 200),
+    ];
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorManager.w_color,
@@ -122,9 +129,17 @@ class HomePageState extends State<HomePage> {
                 width: 500,
                 height: 200,
                 child: ListView.builder(
-                    itemCount: 1,
+                    itemCount: 4,
                     itemBuilder: (BuildContext context, int index) {
-                      return const ItemCard();
+                      return Consumer<Cart>(
+                        builder: (BuildContext context, value, Widget? child) {
+                          return ItemCard(
+                            ontap: () {
+                              value.add(items[index]);
+                            }, icon: Icons.favorite_border,
+                          );
+                        },
+                      );
                     }),
               ),
             ),

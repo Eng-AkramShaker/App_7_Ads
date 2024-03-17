@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:todotask/data/model/cart.dart';
 import 'package:todotask/utils/constants/ColorManager.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard({
     super.key,
+    required this.ontap,
+    required this.icon,
   });
-
+  final void Function() ontap;
+  final IconData icon;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -150,9 +156,17 @@ class ItemCard extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 20.0),
                     child: Row(
                       children: [
-                        const Icon(
-                          Icons.favorite_border,
-                          color: ColorManager.grayColor,
+                        Consumer<Cart>(
+                          builder:
+                              (BuildContext context, value, Widget? child) {
+                            return GestureDetector(
+                              onTap: ontap,
+                              child: Icon(
+                                icon,
+                                color: ColorManager.grayColor,
+                              ),
+                            );
+                          },
                         ),
                         SizedBox(
                           width: .5 * MediaQuery.sizeOf(context).width,

@@ -16,6 +16,6 @@
   ],
   "java.compile.nullAnalysis.mode": "automatic", 
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   }
 }
