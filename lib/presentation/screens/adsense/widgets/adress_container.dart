@@ -5,8 +5,8 @@ import 'package:todotask/utils/constants/ColorManager.dart';
 
 // ignore: must_be_immutable
 class CustomContainer extends StatelessWidget {
-  CustomContainer({super.key, required this.text, required this.icon});
-  var addressController = TextEditingController();
+  CustomContainer({super.key, required this.text, required this.icon, required this.controller});
+  final TextEditingController controller ;
   final String text;
   final IconData icon;
   @override
@@ -18,6 +18,7 @@ class CustomContainer extends StatelessWidget {
         height: 50,
         decoration: const BoxDecoration(color: Colors.white),
         child: CustomTextField(
+          
           height: 50,
           centerText: true,
           lableStyle: const TextStyle(
@@ -25,7 +26,7 @@ class CustomContainer extends StatelessWidget {
             color: ColorManager.grayColor,
           ),
           lable: text,
-          controller: addressController,
+          controller: controller,
           borderColor: ColorManager.primary,
           hasBorder: true,
           radius: 10,

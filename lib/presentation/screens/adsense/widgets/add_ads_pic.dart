@@ -1,10 +1,42 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:todotask/presentation/widgets/custom_tex2.dart';
-import 'package:todotask/utils/constants/ColorManager.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-class AddAdsPicture extends StatelessWidget {
+class AddAdsPicture extends StatefulWidget {
   const AddAdsPicture({super.key});
+
+  @override
+  _AddAdsPictureState createState() => _AddAdsPictureState();
+}
+
+class _AddAdsPictureState extends State<AddAdsPicture> {
+  File? _image;
+
+  Future<void> _getImage() async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      setState(() {
+        _image = File(pickedImage.path);
+      });
+    }
+  }
+
+  Future<void> _uploadImageToFirebase() async {
+    if (_image == null) return;
+
+    try {
+      final firebase_storage.Reference ref = firebase_storage
+          .FirebaseStorage.instance
+          .ref('advImages')
+          .child('image.jpg');
+      await ref.putFile(_image!);
+      print('Image uploaded to Firebase Storage');
+    } catch (e) {
+      print('Error uploading image: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,27 +46,31 @@ class AddAdsPicture extends StatelessWidget {
         width: double.infinity,
         height: MediaQuery.of(context).size.height * 0.2,
         decoration: BoxDecoration(
-          border: Border.all(color: ColorManager.primary, width: 2),
+          border: Border.all(color: Colors.blue, width: 2),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: const Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomText(
-              text: 'أضف صورة الاعلان',
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-              color: ColorManager.grayColor,
+            const Text(
+              'أضف صورة الاعلان',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey,
+              ),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             CircleAvatar(
-                backgroundColor: ColorManager.primary,
-                child: Icon(
-                  Icons.add,
-                  color: ColorManager.w_color,
-                )),
+              backgroundColor: Colors.blue,
+              child: IconButton(
+                icon: const Icon(Icons.add, color: Colors.white),
+                onPressed: () async {
+                  await _getImage();
+                  await _uploadImageToFirebase();
+                },
+              ),
+            ),
           ],
         ),
       ),

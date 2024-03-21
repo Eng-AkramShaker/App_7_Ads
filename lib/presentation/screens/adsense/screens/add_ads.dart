@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:motion_tab_bar/MotionTabBarController.dart';
 import 'package:todotask/presentation/screens/adsense/widgets/add_ads_pic.dart';
@@ -20,7 +21,11 @@ class AddAds extends StatefulWidget {
 class _AddAdsState extends State<AddAds> {
   final addressController = TextEditingController();
   final descriptionController = TextEditingController();
-
+  TextEditingController description = TextEditingController();
+  TextEditingController name = TextEditingController();
+  TextEditingController price = TextEditingController();
+  TextEditingController location = TextEditingController();
+  TextEditingController model = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,33 +50,40 @@ class _AddAdsState extends State<AddAds> {
             CustomContainer(
               text: 'العنوان',
               icon: Icons.place,
+              controller: location,
             ),
             const SizedBox(height: 20),
             CustomContainer(
               text: 'وصف الاعلان ',
               icon: Icons.description,
+              controller: description,
             ),
             const SizedBox(height: 20),
             CustomContainer(
               text: ' اسم المنتج ',
               icon: Icons.text_fields,
+              controller: name,
             ),
             const SizedBox(height: 20),
             CustomContainer(
               text: ' سعر المنتج ',
               icon: Icons.price_check_outlined,
+              controller: price,
             ),
             const SizedBox(height: 20),
             CustomContainer(
               text: 'موديل  المنتج ',
               icon: Icons.category,
+              controller: model,
             ),
             SizedBox(height: .1 * MediaQuery.sizeOf(context).width),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: customButton(
                 text: 'اضف الاعلان',
-                onTap: () {},
+                onTap: () async {
+                  await _uploadData();
+                },
                 width: double.infinity,
                 color: ColorManager.primary,
                 textcolor: ColorManager.w_color,
@@ -84,6 +96,35 @@ class _AddAdsState extends State<AddAds> {
         ),
       ),
     );
+  }
+
+  Future<void> _uploadData() async {
+    try {
+      // Get a reference to the Firestore database
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+      // Add data to a collection
+      await firestore.collection('advertisementcards').add({
+        'name': name.text,
+        'description': description.text,
+        'price': price.text,
+        'location': location.text,
+        'model': model.text,
+      });
+
+      // Clear the text field after uploading
+      name.clear();
+      description.clear();
+      price.clear();
+      location.clear();
+      model.clear();
+
+      // Show a success message
+      CustomSnackBar(context, "uploaded data successfuly", Colors.green);
+    } catch (e) {
+      // Show an error message if uploading fails
+      CustomSnackBar(context, 'Error uploading data: $e', Colors.red);
+    }
   }
 
   @override
