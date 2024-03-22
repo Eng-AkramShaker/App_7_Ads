@@ -4,6 +4,8 @@ import 'package:motion_tab_bar/MotionTabBarController.dart';
 import 'package:todotask/presentation/screens/adsense/widgets/add_ads_pic.dart';
 import 'package:todotask/presentation/screens/adsense/widgets/adress_container.dart';
 import 'package:todotask/presentation/screens/adsense/widgets/describtion_container.dart';
+import 'package:todotask/presentation/screens/home/screens/home_screen.dart';
+import 'package:todotask/presentation/screens/home/widgets/home_body.dart';
 import 'package:todotask/utils/components/components.dart';
 import 'package:todotask/presentation/widgets/custom_tex2.dart';
 

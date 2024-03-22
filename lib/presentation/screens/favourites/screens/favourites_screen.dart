@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:todotask/data/model/cart.dart';
 import 'package:todotask/presentation/widgets/item_card.dart';
 import 'package:todotask/utils/constants/ColorManager.dart';
-import '../widgets/card_adsense.dart';
 
 class FavouritesScreen extends StatefulWidget {
   final MotionTabBarController controller;
@@ -39,6 +38,12 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                     value.remove(value.basket[index]);
                   },
                   icon: Icons.delete,
+                  widget: const Center(),
+                  productName: '',
+                  price: '',
+                  model: '',
+                  location: '',
+                  description: '',
                 );
               });
         }));

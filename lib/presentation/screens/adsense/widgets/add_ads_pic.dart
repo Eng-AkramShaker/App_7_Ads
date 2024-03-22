@@ -1,7 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'dart:typed_data';
+import 'package:uuid/uuid.dart';
+
+
+import 'package:path_provider/path_provider.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:multi_image_picker_plus/multi_image_picker_plus.dart';
+import 'package:todotask/utils/constants/ColorManager.dart';
 
 class AddAdsPicture extends StatefulWidget {
   const AddAdsPicture({super.key});
@@ -11,30 +17,52 @@ class AddAdsPicture extends StatefulWidget {
 }
 
 class _AddAdsPictureState extends State<AddAdsPicture> {
-  File? _image;
+  List<File> _images = [];
 
-  Future<void> _getImage() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(source: ImageSource.camera);
-    if (pickedImage != null) {
+  Future<void> _getImages() async {
+    List<Asset> pickedImages = [];
+    try {
+      pickedImages = await MultiImagePicker.pickImages();
+    } catch (e) {
+      print('Error picking images: $e');
+    }
+
+    if (pickedImages.isNotEmpty) {
+      List<File> images = [];
+      for (var pickedImage in pickedImages) {
+        try {
+          final ByteData byteData = await pickedImage.getByteData();
+          final List<int> imageData = byteData.buffer.asUint8List();
+          final tempDir = await getTemporaryDirectory();
+          final tempFile = File('${tempDir.path}/${pickedImage.name}');
+          await tempFile.writeAsBytes(imageData);
+          images.add(tempFile);
+        } catch (e) {
+          print('Error converting asset to file: $e');
+        }
+      }
       setState(() {
-        _image = File(pickedImage.path);
+        _images = images;
       });
     }
   }
 
-  Future<void> _uploadImageToFirebase() async {
-    if (_image == null) return;
-
+  Future<void> _uploadImagesToFirebase(List<File> images) async {
     try {
-      final firebase_storage.Reference ref = firebase_storage
-          .FirebaseStorage.instance
-          .ref('advImages')
-          .child('image.jpg');
-      await ref.putFile(_image!);
-      print('Image uploaded to Firebase Storage');
+      final firebase_storage.Reference storageRef =
+          firebase_storage.FirebaseStorage.instance.ref('advImages');
+
+      for (int i = 0; i < images.length; i++) {
+        final File image = images[i];
+         // Generate a unique name for each image using UUID
+      final String uuid = Uuid().v4();
+      final firebase_storage.Reference ref =
+          storageRef.child('image_$uuid.jpg');// Use a unique name for each image
+        await ref.putFile(image);
+        print('Image $i uploaded to Firebase Storage');
+      }
     } catch (e) {
-      print('Error uploading image: $e');
+      print('Error uploading images: $e');
     }
   }
 
@@ -46,33 +74,35 @@ class _AddAdsPictureState extends State<AddAdsPicture> {
         width: double.infinity,
         height: MediaQuery.of(context).size.height * 0.2,
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.blue, width: 2),
+          border: Border.all(color: ColorManager.primary, width: 2),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'أضف صورة الاعلان',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey,
+        child: _images.isNotEmpty
+            ? Image.file(_images.first)
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'أضف صورة الاعلان',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  CircleAvatar(
+                    backgroundColor: Colors.blue,
+                    child: IconButton(
+                      icon: const Icon(Icons.add, color: Colors.white),
+                      onPressed: () async {
+                        await _getImages();
+                        await _uploadImagesToFirebase(_images);
+                      },
+                    ),
+                  ),
+                ],
               ),
-            ),
-            const SizedBox(height: 10),
-            CircleAvatar(
-              backgroundColor: Colors.blue,
-              child: IconButton(
-                icon: const Icon(Icons.add, color: Colors.white),
-                onPressed: () async {
-                  await _getImage();
-                  await _uploadImageToFirebase();
-                },
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

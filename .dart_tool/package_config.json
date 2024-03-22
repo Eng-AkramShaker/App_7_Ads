@@ -74,6 +74,12 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "crypto",
+      "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/crypto-3.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "cupertino_icons",
       "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/cupertino_icons-1.0.6",
       "packageUri": "lib/",
@@ -96,6 +102,12 @@
       "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/fake_async-1.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "ffi",
+      "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/ffi-2.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
     },
     {
       "name": "file_selector_linux",
@@ -174,6 +186,12 @@
       "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/firebase_storage_web-3.8.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
+    },
+    {
+      "name": "fixnum",
+      "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/fixnum-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "flutter",
@@ -344,6 +362,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "multi_image_picker_plus",
+      "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/multi_image_picker_plus-0.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
       "name": "nested",
       "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/nested-1.0.0",
       "packageUri": "lib/",
@@ -362,10 +386,52 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "path_provider",
+      "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/path_provider-2.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "path_provider_android",
+      "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/path_provider_android-2.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "path_provider_foundation",
+      "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/path_provider_foundation-2.3.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "path_provider_linux",
+      "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/path_provider_linux-2.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "path_provider_platform_interface",
+      "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/path_provider_platform_interface-2.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "path_provider_windows",
+      "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/path_provider_windows-2.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "petitparser",
       "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/petitparser-6.0.2",
       "packageUri": "lib/",
       "languageVersion": "3.2"
+    },
+    {
+      "name": "platform",
+      "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/platform-3.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "plugin_platform_interface",
@@ -390,6 +456,12 @@
       "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/source_span-1.10.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "sprintf",
+      "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/sprintf-7.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "stack_trace",
@@ -428,6 +500,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "uuid",
+      "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/uuid-4.3.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "vector_graphics",
       "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/vector_graphics-1.1.11+1",
       "packageUri": "lib/",
@@ -464,6 +542,18 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "win32",
+      "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/win32-5.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
+      "name": "xdg_directories",
+      "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/xdg_directories-1.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "xml",
       "rootUri": "file:///C:/Users/East-Sound/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/xml-6.5.0",
       "packageUri": "lib/",
@@ -476,7 +566,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-03-21T01:13:47.960138Z",
+  "generated": "2024-03-22T04:03:28.503086Z",
   "generator": "pub",
   "generatorVersion": "3.3.1"
 }

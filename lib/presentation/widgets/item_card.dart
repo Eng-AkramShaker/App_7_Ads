@@ -1,17 +1,24 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:todotask/data/model/cart.dart';
 import 'package:todotask/utils/constants/ColorManager.dart';
 
 class ItemCard extends StatelessWidget {
-  const ItemCard({
+  ItemCard({
     super.key,
     required this.ontap,
     required this.icon,
+    required this.widget, required this.productName, required this.price, required this.model, required this.location, required this.description,
   });
   final void Function() ontap;
   final IconData icon;
+  final Widget widget;
+final  String productName;
+ final String price;
+ final String model;
+ final String location;
+ final String description;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -29,56 +36,56 @@ class ItemCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const FittedBox(
+                FittedBox(
                   child: Padding(
-                    padding: EdgeInsets.only(right: 20),
+                    padding: const EdgeInsets.only(right: 20),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          "تيوتا",
-                          style: TextStyle(
+                          productName!,
+                          style: const TextStyle(
                               color: ColorManager.primary,
                               fontSize: 15,
                               fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        const Text(
                           " | ",
                           style: TextStyle(
                               fontSize: 40, color: ColorManager.grayColor),
                         ),
                         Text(
-                          "كرولا",
-                          style: TextStyle(
+                          model!,
+                          style: const TextStyle(
                               color: ColorManager.primary,
                               fontSize: 15,
                               fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        const Text(
                           " | ",
                           style: TextStyle(
                               fontSize: 40, color: ColorManager.grayColor),
                         ),
-                        Text(
+                        const Text(
                           "2018",
                           style: TextStyle(
                               color: ColorManager.primary,
                               fontSize: 15,
                               fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        const Text(
                           " | ",
                           style: TextStyle(
                               fontSize: 40, color: ColorManager.grayColor),
                         ),
-                        Text(
+                        const Text(
                           "3500",
                           style: TextStyle(
                               color: ColorManager.primary,
                               fontSize: 15,
                               fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        const Text(
                           " | ",
                           style: TextStyle(
                               fontSize: 40,
@@ -99,9 +106,9 @@ class ItemCard extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text(
-                          "الجيزة",
-                          style: TextStyle(
+                        Text(
+                          location!,
+                          style: const TextStyle(
                               color: ColorManager.primary,
                               fontSize: 15,
                               fontWeight: FontWeight.bold),
@@ -172,7 +179,7 @@ class ItemCard extends StatelessWidget {
                           width: .5 * MediaQuery.sizeOf(context).width,
                         ),
                         Text(
-                          "175\$",
+                          "$price\$",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.green[600]),
@@ -183,10 +190,7 @@ class ItemCard extends StatelessWidget {
                 )
               ],
             ),
-            Image.asset(
-              "assets/images/car.png",
-              width: 100,
-            )
+            widget
           ],
         ),
       ),

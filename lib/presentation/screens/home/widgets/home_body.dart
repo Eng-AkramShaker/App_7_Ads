@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -8,8 +10,8 @@ import 'package:todotask/data/model/product.dart';
 import 'package:todotask/presentation/screens/home/widgets/custom_container.dart';
 import 'package:todotask/presentation/screens/home/widgets/drop_down.dart';
 import 'package:todotask/presentation/screens/home/widgets/search_container.dart';
-import 'package:todotask/presentation/widgets/item_card.dart';
 
+import 'package:todotask/presentation/widgets/item_card.dart';
 import 'package:todotask/utils/controller/home_controller.dart';
 
 import '../../../../utils/constants/ColorManager.dart';
@@ -27,6 +29,8 @@ class HomePageState extends State<HomePage> {
 //
   @override
   void initState() {
+    Future.delayed(const Duration(seconds: 5));
+    _getImageUrls();
     ints(context);
 
     super.initState();
@@ -124,28 +128,96 @@ class HomePageState extends State<HomePage> {
               ),
             ),
             SliverFillRemaining(
-              child: Container(
-                margin: const EdgeInsets.only(top: 20, left: 5, right: 1),
-                width: 500,
-                height: 200,
-                child: ListView.builder(
-                    itemCount: 4,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Consumer<Cart>(
-                        builder: (BuildContext context, value, Widget? child) {
-                          return ItemCard(
-                            ontap: () {
-                              value.add(items[index]);
-                            }, icon: Icons.favorite_border,
-                          );
-                        },
-                      );
-                    }),
-              ),
+              child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('advertisementcards')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      return snapshot.data!.docs.isNotEmpty
+                          ? Container(
+                              margin: const EdgeInsets.only(
+                                  top: 20, left: 5, right: 1),
+                              width: 500,
+                              height: 200,
+                              child: ListView.builder(
+                                  itemCount: snapshot.data!.docs.isNotEmpty
+                                      ? snapshot.data!.docs.length
+                                      : 1,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    final data = snapshot.data!.docs;
+                                    return Consumer<Cart>(
+                                      builder: (BuildContext context, value,
+                                          Widget? child) {
+                                        return ItemCard(
+                                          ontap: () {
+                                            value.add(items[index]);
+                                          },
+                                          icon: Icons.favorite_border,
+                                          widget: _imageUrls.isEmpty
+                                              ? const CircularProgressIndicator()
+                                              : Image.network(
+                                                  _imageUrls[index],
+                                                  width: 70,
+                                                  fit: BoxFit.contain,
+                                                  errorBuilder: (context, error,
+                                                      stackTrace) {
+                                                    return const Icon(
+                                                        Icons.broken_image);
+                                                  },
+                                                ),
+                                          productName:
+                                              data[index]['name'] ?? "",
+                                          price: data[index]['price'] ?? "",
+                                          model: data[index]['model'] ?? "",
+                                          location:
+                                              data[index]['location'] ?? "",
+                                          description:
+                                              data[index]['description'] ?? "",
+                                        );
+                                      },
+                                    );
+                                  }),
+                            )
+                          : const Center(
+                              child:
+                                  Text("You didn’ t add ant advertisment yet"),
+                            );
+                    }
+                  }),
             ),
           ],
         ),
       ),
     );
+  }
+
+  List<String> _imageUrls = [];
+
+  Future<void> _getImageUrls() async {
+    try {
+      final firebase_storage.FirebaseStorage storage =
+          firebase_storage.FirebaseStorage.instance;
+      final firebase_storage.Reference ref =
+          storage.ref('advImages'); // Specify the reference path here
+      final firebase_storage.ListResult result = await ref.listAll();
+
+      final List<String> urls = [];
+      for (final firebase_storage.Reference item in result.items) {
+        final String downloadUrl = await item.getDownloadURL();
+        urls.add(downloadUrl);
+      }
+
+      setState(() {
+        _imageUrls = urls;
+      });
+    } catch (e) {
+      print('Error fetching image URLs: $e');
+    }
   }
 }

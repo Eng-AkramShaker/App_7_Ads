@@ -56,7 +56,7 @@ CustomSnackBar(BuildContext context, String text, Color color) {
       backgroundColor: color,
       behavior: SnackBarBehavior.floating,
       margin: EdgeInsets.only(
-        bottom: MediaQuery.sizeOf(context).height - 120,
+        bottom: MediaQuery.sizeOf(context).height - 140,
         left: 10,
         right: 10,
       ),
