@@ -1,8 +1,11 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, unused_import
 
 import 'dart:async';
 import 'dart:math';
 
+import 'package:app_7/core/constants/navigators.dart';
+import 'package:app_7/presentation/screens/auth/screens/sign_In_screen.dart';
+import 'package:app_7/presentation/screens/auth/screens/sign_up_screen.dart';
 import 'package:app_7/presentation/screens/home/screens/home.dart';
 import 'package:flutter/material.dart';
 
@@ -16,39 +19,24 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-    vsync: this,
-    duration: const Duration(seconds: 2),
-  );
-  late Animation<double> _scaleAnimation;
+  late final AnimationController _controller = AnimationController(vsync: this, duration: const Duration(seconds: 2));
   late Animation<double> _rotateAnimation;
+
   Timer? timer;
+
   @override
   void initState() {
     timer = Timer(
       const Duration(seconds: 3),
       () {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => const Home()));
+        // pushAndRemoveUntil(context, Home());
+        pushAndRemoveUntil(context, Sign_in_Screen());
+
+        // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => const Home()));
       },
     );
 
-    _scaleAnimation = CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(
-        0.0,
-        0.8,
-        curve: Curves.easeOut,
-      ),
-    );
-
-    _rotateAnimation = CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(
-        0.5,
-        1.0,
-        curve: Curves.easeOut,
-      ),
-    );
+    _rotateAnimation = CurvedAnimation(parent: _controller, curve: const Interval(0.5, 1.0, curve: Curves.easeOut));
 
     _controller.addStatusListener(
       (status) {

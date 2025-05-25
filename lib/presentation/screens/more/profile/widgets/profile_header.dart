@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/ColorManager.dart';
+import '../../../../../core/constants/ColorManager.dart';
 import 'info_item.dart';
 
 class ProfileHeader extends StatelessWidget {

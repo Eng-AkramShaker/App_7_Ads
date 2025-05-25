@@ -7,7 +7,6 @@ import 'package:app_7/presentation/screens/add/widgets/show/show_congratulations
 import 'package:app_7/presentation/screens/home/controller/cart.dart';
 import 'package:app_7/presentation/widgets/snack_bar/Snack_Bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -239,13 +238,13 @@ class Add_Controller extends ChangeNotifier {
 
       await pop(context);
 
-      Snack_Bar(context, Colors.green, " ! يوجد حقل فارغ");
+      Snack_Bar(context, " ! يوجد حقل فارغ", color: Colors.green);
     } else {
       try {
         if (selectedOption == true) {
           await pop(context);
 
-          Snack_Bar(context, Colors.green, " جاري التحميل ....");
+          Snack_Bar(context, " جاري التحميل ....", color: Colors.green);
 
           Map<String, dynamic> data = {
             'selectedValue_City': selectedValue_City,
@@ -275,12 +274,12 @@ class Add_Controller extends ChangeNotifier {
 
           selectedOption = false;
 
-          Snack_Bar(context, Colors.red, "يرجى الموافقة على الشروط والأحكام قبل المتابعة.");
+          Snack_Bar(context, "يرجى الموافقة على الشروط والأحكام قبل المتابعة.");
         }
 
         notifyListeners();
       } catch (e) {
-        Snack_Bar(context, Colors.red, 'Error uploading data: $e');
+        Snack_Bar(context, 'Error uploading data: $e');
       }
     }
   }

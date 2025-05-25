@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:app_7/core/constants/ColorManager.dart';
 
-import '../../../../core/components/components.dart';
-import '../../../widgets/custom_tex2.dart';
+import '../../../../../core/components/components.dart';
+import '../../../../widgets/custom_tex2.dart';
 
 class PointsContainer extends StatefulWidget {
   const PointsContainer({super.key});

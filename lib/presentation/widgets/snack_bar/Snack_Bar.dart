@@ -1,18 +1,21 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 
-Snack_Bar(BuildContext context, Color color, String text) {
-  return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+void Snack_Bar(BuildContext context, String text, {Color? color}) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      backgroundColor: color ?? Colors.red,
+      duration: const Duration(milliseconds: 2000),
+      behavior: SnackBarBehavior.floating,
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
       showCloseIcon: true,
       closeIconColor: Colors.white,
-      backgroundColor: color,
-      duration: const Duration(milliseconds: 1500),
-      behavior: SnackBarBehavior.floating,
-      margin: EdgeInsets.only(
-        bottom: MediaQuery.sizeOf(context).height - 140,
-        left: 10,
-        right: 10,
+      content: Text(
+        text,
+        textAlign: TextAlign.right, // أو left حسب اللغة
+        style: const TextStyle(color: Colors.white),
       ),
-      content: Center(child: Text(text))));
+    ),
+  );
 }

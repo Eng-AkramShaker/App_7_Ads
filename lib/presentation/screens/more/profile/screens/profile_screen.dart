@@ -1,15 +1,13 @@
-import 'package:app_7/presentation/screens/profile/widgets/points_container.dart';
-import 'package:app_7/presentation/screens/profile/widgets/wallet_container.dart';
+import 'package:app_7/presentation/screens/more/profile/widgets/points_container.dart';
+import 'package:app_7/presentation/screens/more/profile/widgets/wallet_container.dart';
 import 'package:flutter/material.dart';
-import 'package:motion_tab_bar/MotionTabBarController.dart';
 import 'package:app_7/core/constants/ColorManager.dart';
 
 import '../widgets/profile_header.dart';
 
 class MyProfile extends StatefulWidget {
-  const MyProfile({required this.controller, super.key});
+  const MyProfile({super.key});
 
-  final MotionTabBarController controller;
   @override
   State<MyProfile> createState() => _MyProfileState();
 }

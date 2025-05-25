@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app_7/core/constants/ColorManager.dart';
 
-import '../../../widgets/custom_tex2.dart';
+import '../../../../widgets/custom_tex2.dart';
 
 class infoItem extends StatelessWidget {
   infoItem({
