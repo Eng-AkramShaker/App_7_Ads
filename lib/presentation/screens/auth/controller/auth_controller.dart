@@ -14,9 +14,10 @@ class Auth_Controller extends ChangeNotifier {
   FirebaseAuth auth = FirebaseAuth.instance;
   User_Model? user;
 
+  bool isLoding = false;
+
   String? verif_Id;
   String? phoneNumber;
-
   TextEditingController username = TextEditingController();
   TextEditingController email = TextEditingController();
 
@@ -101,6 +102,7 @@ class Auth_Controller extends ChangeNotifier {
     if (formKey.currentState == null || !formKey.currentState!.validate()) {
       return null;
     }
+    isLoding = true;
 
     try {
       final userCredential = await auth.signInWithEmailAndPassword(
@@ -136,7 +138,6 @@ class Auth_Controller extends ChangeNotifier {
         return 'تم تسجيل الدخول بنجاح';
       } else {
         Snack_Bar(context, 'فشل تسجيل الدخول');
-        return null;
       }
     } on FirebaseAuthException catch (e) {
       String errorMessage;
@@ -170,12 +171,15 @@ class Auth_Controller extends ChangeNotifier {
           errorMessage = 'حدث خطأ غير متوقع أثناء تسجيل الدخول: ${e.code}';
       }
       Snack_Bar(context, errorMessage);
-      return null;
     } catch (e) {
       Snack_Bar(context, 'حدث خطأ غير متوقع');
       debugPrint('خطأ في تسجيل الدخول: ${e.toString()}');
-      return null;
+    } finally {
+      isLoding = false;
+      notifyListeners();
     }
+
+    return null;
   }
 
   //  Sign Up  ============================================
@@ -194,6 +198,9 @@ class Auth_Controller extends ChangeNotifier {
         return null;
       }
 
+      isLoding = true;
+      notifyListeners();
+
       try {
         // إنشاء الحساب باستخدام Firebase Authentication
         UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
@@ -201,17 +208,20 @@ class Auth_Controller extends ChangeNotifier {
         User? user = userCredential.user;
 
         if (user != null) {
-          // حفظ بيانات المستخدم في Firestore (كلكشن "users")
+          // حفظ بيانات المستخدم في Firestore
           await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
             'username': username,
             'email': email,
             'createdAt': FieldValue.serverTimestamp(),
-          }); // لا تحفظ كلمة المرور هنا لأسباب أمنية!
+          });
 
           Snack_Bar(context, 'تم إنشاء الحساب بنجاح', color: Colors.green);
 
-          // يمكنك التنقل للشاشة التالية هنا، مثلاً شاشة تسجيل الدخول
-          // Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => SignInScreen()));
+          // الانتقال إلى شاشة تسجيل الدخول
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => Sign_in_Screen()),
+          );
 
           return 'تم إنشاء الحساب بنجاح';
         } else {
@@ -231,8 +241,12 @@ class Auth_Controller extends ChangeNotifier {
       } catch (e) {
         Snack_Bar(context, 'خطأ غير متوقع: ${e.toString()}');
         return null;
+      } finally {
+        isLoding = false;
+        notifyListeners();
       }
     }
+
     return null;
   }
 
@@ -244,9 +258,12 @@ class Auth_Controller extends ChangeNotifier {
       return;
     }
 
+    isLoding = true;
+
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email.trim());
       Snack_Bar(context, 'تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.', color: Colors.green);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => Sign_in_Screen()));
     } on FirebaseAuthException catch (e) {
       String errorMessage = 'حدث خطأ غير متوقع.';
       switch (e.code) {
@@ -263,6 +280,9 @@ class Auth_Controller extends ChangeNotifier {
       Snack_Bar(context, errorMessage);
     } catch (e) {
       Snack_Bar(context, 'حدث خطأ أثناء إرسال الرابط.');
+    } finally {
+      isLoding = false;
+      notifyListeners();
     }
   }
 

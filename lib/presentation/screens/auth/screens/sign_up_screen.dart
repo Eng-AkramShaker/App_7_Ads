@@ -38,172 +38,176 @@ class _SignUpScreenState extends State<SignUpScreen> {
               },
             ),
           ),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                  flex: 1,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(height: .05 * height_media(context)),
-                        Text(
-                          " تسجيل حساب جديد",
-                          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 22),
-                        ),
-                        Text(
-                          "نطمح أن تكون مجموعتنا الخيار الأول للمشترين عبر الإنترنت",
-                          style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
-                        ),
-                      ],
-                    ),
-                  )),
-              SizedBox(height: .03 * height_media(context)),
-              Expanded(
-                  flex: 4,
-                  child: Form(
-                    key: formKey_Sign_up,
-                    child: Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
+          body: proAuth.isLoding
+              ? Center(
+                  child: CircularProgressIndicator(color: ColorManager.primary),
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        flex: 1,
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              CustomTextField(
-                                hint: 'أسم المستخدم *',
-                                secure: false,
-                                icon: Icons.person,
-                                controlller: proAuth.username,
-                                validator: proAuth.validateUsername,
+                              SizedBox(height: .05 * height_media(context)),
+                              Text(
+                                " تسجيل حساب جديد",
+                                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 22),
                               ),
-                              const SizedBox(height: 20),
-                              CustomTextField(
-                                hint: 'الأيميل *',
-                                secure: false,
-                                icon: Icons.email,
-                                controlller: proAuth.email,
-                                validator: proAuth.validateEmail,
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              CustomTextField(
-                                hint: 'الباسورد *',
-                                secure: secure,
-                                icon: secure ? Icons.lock : Icons.lock_open_rounded,
-                                onTap: () {
-                                  setState(() {
-                                    secure = !secure;
-                                  });
-                                },
-                                controlller: proAuth.password,
-                                validator: proAuth.validatePassword,
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              CustomTextField(
-                                hint: 'تأكيد الباسورد *',
-                                secure: secure2,
-                                icon: secure2 ? Icons.lock : Icons.lock_open_rounded,
-                                onTap: () {
-                                  setState(() {
-                                    secure2 = !secure2;
-                                  });
-                                },
-                                controlller: proAuth.C_password,
-                                validator: proAuth.validateConfirmPassword,
-                              ),
-                              Row(
-                                children: [
-                                  Transform.scale(
-                                    scale: 0.8,
-                                    child: Checkbox(
-                                        activeColor: ColorManager.primary,
-                                        value: value,
-                                        onChanged: (val) {
-                                          setState(() {
-                                            value = val!;
-                                          });
-                                        }),
-                                  ),
-                                  Text(
-                                    "عند تسجيلك فإنك توافق على شروط سهيل.",
-                                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
-                                  )
-                                ],
+                              Text(
+                                "نطمح أن تكون مجموعتنا الخيار الأول للمشترين عبر الإنترنت",
+                                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                    ),
-                  )),
-              Expanded(
-                  flex: 2,
-                  child: Container(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Center(
-                            child: MaterialButton(
-                              minWidth: .9 * width_media(context),
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                              height: 40,
-                              color: ColorManager.primary,
-                              onPressed: () async {
-                                //
-
-                                proAuth.Sign_up(
-                                  context,
-                                  proAuth.username.text,
-                                  proAuth.email.text,
-                                  proAuth.password.text,
-                                  proAuth.C_password.text,
-                                  formKey_Sign_up,
-                                ).then((onValue) {
-                                  if (proAuth.user != null) {
-                                    pushNewScreen(context, Sign_in_Screen());
-                                  }
-                                });
-                              },
-                              child:
-                                  Text("أنشاء حساب", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white)),
+                        )),
+                    SizedBox(height: .03 * height_media(context)),
+                    Expanded(
+                        flex: 4,
+                        child: Form(
+                          key: formKey_Sign_up,
+                          child: Container(
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    CustomTextField(
+                                      hint: 'أسم المستخدم *',
+                                      secure: false,
+                                      icon: Icons.person,
+                                      controlller: proAuth.username,
+                                      validator: proAuth.validateUsername,
+                                    ),
+                                    const SizedBox(height: 20),
+                                    CustomTextField(
+                                      hint: 'الأيميل *',
+                                      secure: false,
+                                      icon: Icons.email,
+                                      controlller: proAuth.email,
+                                      validator: proAuth.validateEmail,
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    CustomTextField(
+                                      hint: 'الباسورد *',
+                                      secure: secure,
+                                      icon: secure ? Icons.lock : Icons.lock_open_rounded,
+                                      onTap: () {
+                                        setState(() {
+                                          secure = !secure;
+                                        });
+                                      },
+                                      controlller: proAuth.password,
+                                      validator: proAuth.validatePassword,
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    CustomTextField(
+                                      hint: 'تأكيد الباسورد *',
+                                      secure: secure2,
+                                      icon: secure2 ? Icons.lock : Icons.lock_open_rounded,
+                                      onTap: () {
+                                        setState(() {
+                                          secure2 = !secure2;
+                                        });
+                                      },
+                                      controlller: proAuth.C_password,
+                                      validator: proAuth.validateConfirmPassword,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Transform.scale(
+                                          scale: 0.8,
+                                          child: Checkbox(
+                                              activeColor: ColorManager.primary,
+                                              value: value,
+                                              onChanged: (val) {
+                                                setState(() {
+                                                  value = val!;
+                                                });
+                                              }),
+                                        ),
+                                        Text(
+                                          "عند تسجيلك فإنك توافق على جميع شروط كناري.",
+                                          style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                        )),
+                    Expanded(
+                        flex: 2,
+                        child: Container(
+                          child: SingleChildScrollView(
+                            child: Column(
                               children: [
-                                const Text(
-                                  "هل لديك حساب بالفعل؟",
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    // pushNewScreen(context, SignUpScreen());
-                                  },
-                                  child: const Text(
-                                    "تسجيل دخول ",
-                                    style: TextStyle(
-                                        color: ColorManager.primary,
-                                        decoration: TextDecoration.underline,
-                                        decorationColor: ColorManager.primary),
+                                Center(
+                                  child: MaterialButton(
+                                    minWidth: .9 * width_media(context),
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                    height: 40,
+                                    color: ColorManager.primary,
+                                    onPressed: () async {
+                                      //
+
+                                      proAuth.Sign_up(
+                                        context,
+                                        proAuth.username.text,
+                                        proAuth.email.text,
+                                        proAuth.password.text,
+                                        proAuth.C_password.text,
+                                        formKey_Sign_up,
+                                      ).then((onValue) {
+                                        if (proAuth.user != null) {
+                                          pushNewScreen(context, Sign_in_Screen());
+                                        }
+                                      });
+                                    },
+                                    child: Text("أنشاء حساب",
+                                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white)),
                                   ),
-                                )
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Text(
+                                        "هل لديك حساب بالفعل؟",
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          pushNewScreen(context, Sign_in_Screen());
+                                        },
+                                        child: const Text(
+                                          "تسجيل دخول ",
+                                          style: TextStyle(
+                                              color: ColorManager.primary,
+                                              decoration: TextDecoration.underline,
+                                              decorationColor: ColorManager.primary),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  )),
-            ],
-          ),
+                        )),
+                  ],
+                ),
         ),
       );
     });
