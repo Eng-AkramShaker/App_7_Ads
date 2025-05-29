@@ -75,7 +75,7 @@ class _Sign_in_ScreenState extends State<Sign_in_Screen> with SingleTickerProvid
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: CustomText(
-                                          text: 'مرحبا بكناري',
+                                          text: 'مرحبا بك في بكناري',
                                           color: ColorManager.primary,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 17,

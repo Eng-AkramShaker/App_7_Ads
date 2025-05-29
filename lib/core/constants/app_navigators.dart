@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-/// الانتقال إلى شاشة جديدة باستخدام اسم المسار
-void pushNewScreen(BuildContext context, String route, {dynamic arguments}) {
-  Navigator.pushNamed(context, route, arguments: arguments);
+void pushNewScreen(BuildContext context, Widget screen) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
 }
 
 /// الانتقال إلى شاشة جديدة مع إزالة جميع الشاشات السابقة

@@ -6,6 +6,7 @@ import 'package:app_7/presentation/screens/more/about_us/about_us.dart';
 import 'package:app_7/presentation/screens/more/contact%20us/contact_us.dart';
 import 'package:app_7/presentation/screens/more/privacy_policy/privacy_policy_screen.dart';
 import 'package:app_7/presentation/screens/more/profile/screens/profile_screen.dart';
+import 'package:app_7/presentation/screens/more/terms_conditions/terms_conditions_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:motion_tab_bar/MotionTabBarController.dart';
 import 'package:app_7/core/constants/ColorManager.dart';
@@ -109,6 +110,14 @@ class _MoreScreenState extends State<MoreScreen> {
                       title: Text('سياسة الخصوصية', style: TextStyle(color: ColorManager.primary)),
                       onTap: () {
                         pushNewScreen(context, Privacy_Policy_Screen());
+                      },
+                    ),
+
+                    ListTile(
+                      leading: Icon(Icons.article, color: ColorManager.primary),
+                      title: Text('الشروط والأحكام', style: TextStyle(color: ColorManager.primary)),
+                      onTap: () {
+                        pushNewScreen(context, Terms_Conditions_Screen());
                       },
                     ),
 

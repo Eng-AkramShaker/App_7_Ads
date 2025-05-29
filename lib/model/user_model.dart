@@ -6,12 +6,16 @@ class User_Model {
   final String uid;
   final String username;
   final String email;
+  final String phone;
+  final String imageUrl;
   final DateTime createdAt;
 
   User_Model({
     required this.uid,
     required this.username,
     required this.email,
+    required this.phone,
+    required this.imageUrl,
     required this.createdAt,
   });
 
@@ -20,6 +24,8 @@ class User_Model {
       uid: uid,
       username: data['username'] ?? '',
       email: data['email'] ?? '',
+      phone: data['phone'] ?? '',
+      imageUrl: data['imageUrl'] ?? '',
       createdAt: (data['createdAt'] as Timestamp).toDate(),
     );
   }
@@ -28,6 +34,8 @@ class User_Model {
     return {
       'username': username,
       'email': email,
+      'phone': phone,
+      'imageUrl': imageUrl,
       'createdAt': createdAt,
     };
   }

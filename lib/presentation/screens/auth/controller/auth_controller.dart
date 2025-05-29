@@ -1,5 +1,6 @@
 // ignore_for_file: camel_case_types, non_constant_identifier_names, avoid_print, unused_element, prefer_typing_uninitialized_variables, use_build_context_synchronously, await_only_futures
 
+import 'dart:io';
 import 'package:app_7/core/constants/app_navigators.dart';
 import 'package:app_7/model/user_model.dart';
 import 'package:app_7/presentation/screens/auth/screens/sign_In_screen.dart';
@@ -7,7 +8,9 @@ import 'package:app_7/presentation/screens/home/screens/home.dart';
 import 'package:app_7/presentation/widgets/snack_bar/Snack_Bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Auth_Controller extends ChangeNotifier {
@@ -15,6 +18,9 @@ class Auth_Controller extends ChangeNotifier {
   User_Model? user;
 
   bool isLoding = false;
+
+  final ImagePicker picker = ImagePicker();
+  File? imageFile;
 
   String? verif_Id;
   String? phoneNumber;
@@ -80,6 +86,17 @@ class Auth_Controller extends ChangeNotifier {
     return null;
   }
 
+  /// اختيار صورة من المعرض
+  ///
+
+  Future<void> pickImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      imageFile = File(pickedFile.path);
+      notifyListeners();
+    }
+  }
+
   //------------------------------------------------------------------
 
   PhoneAuth() async {
@@ -111,34 +128,31 @@ class Auth_Controller extends ChangeNotifier {
       );
       User? currentUser = userCredential.user;
 
-      if (currentUser != null) {
-        // جلب بيانات المستخدم من Firestore
-        final userData = await FirebaseFirestore.instance.collection('users').doc(currentUser.uid).get();
+      // جلب بيانات المستخدم من Firestore
+      final userData = await FirebaseFirestore.instance.collection('users').doc(currentUser!.uid).get();
 
-        if (userData.exists) {
-          final data = userData.data();
-          user = await User_Model.fromMap(data!, currentUser.uid);
+      if (userData.exists) {
+        final data = userData.data();
+        user = await User_Model.fromMap(data!, currentUser.uid);
 
-          // ✅ طباعة بيانات المستخدم
-          print('👤 اسم المستخدم: ${user!.username}');
+        // ✅ طباعة بيانات المستخدم
+        print('👤 اسم المستخدم: ${user!.username}');
 
-          // Provider.of<Auth_Controller>(context, listen: false).setCurrentUser(currentUser);
-        } else {
-          print('🚫 لا توجد بيانات للمستخدم في Firestore');
-        }
-
-        // حفظ بيانات أساسية في SharedPreferences
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('uid', user!.uid);
-        await prefs.setString('email', user!.username ?? '');
-        await prefs.setString('email', user!.email ?? '');
-
-        Snack_Bar(context, 'تم تسجيل الدخول بنجاح', color: Colors.green);
-        pushAndRemoveUntil(context, const Home());
-        return 'تم تسجيل الدخول بنجاح';
+        // Provider.of<Auth_Controller>(context, listen: false).setCurrentUser(currentUser);
       } else {
-        Snack_Bar(context, 'فشل تسجيل الدخول');
+        print('🚫 لا توجد بيانات للمستخدم في Firestore');
       }
+
+      // حفظ بيانات أساسية في SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('uid', user!.uid);
+      await prefs.setString('email', user!.username);
+      await prefs.setString('email', user!.email);
+
+      Snack_Bar(context, 'تم تسجيل الدخول بنجاح', color: Colors.green);
+      pushAndRemoveUntil(context, const Home());
+
+      return 'تم تسجيل الدخول بنجاح';
     } on FirebaseAuthException catch (e) {
       String errorMessage;
 
@@ -218,10 +232,7 @@ class Auth_Controller extends ChangeNotifier {
           Snack_Bar(context, 'تم إنشاء الحساب بنجاح', color: Colors.green);
 
           // الانتقال إلى شاشة تسجيل الدخول
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => Sign_in_Screen()),
-          );
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => Sign_in_Screen()));
 
           return 'تم إنشاء الحساب بنجاح';
         } else {
@@ -301,6 +312,60 @@ class Auth_Controller extends ChangeNotifier {
     } catch (e) {
       Snack_Bar(context, 'فشل تسجيل الخروج');
       debugPrint('Logout Error: $e');
+    }
+  }
+
+  ///  update Profile =====================================================================
+  Future<void> updateProfile(
+    BuildContext context, {
+    required String username,
+    required String email,
+    required String phone,
+    required String imageUrl,
+  }) async {
+    try {
+      final uid = auth.currentUser!.uid;
+
+      // 1. رفع الصورة إن وُجدت
+      if (imageFile != null) {
+        final ref = FirebaseStorage.instance.ref().child('users_img/$uid.jpg');
+        await ref.putFile(imageFile!);
+        imageUrl = await ref.getDownloadURL();
+      }
+
+      // 2. تجهيز بيانات التحديث
+      final updateData = {
+        'username': username,
+        'email': email,
+        'phone': phone,
+        'imageUrl': imageUrl,
+        'updatedAt': Timestamp.now(),
+      };
+
+      // 3. تحديث البيانات في Firestore
+      await FirebaseFirestore.instance.collection('users').doc(uid).set(updateData, SetOptions(merge: true));
+
+      // 4. تحديث البيانات المحلية
+      user = User_Model(
+        uid: uid,
+        username: username,
+        email: email,
+        phone: phone,
+        createdAt: user?.createdAt ?? DateTime.now(),
+        imageUrl: imageUrl,
+      );
+
+      notifyListeners();
+
+      // ✅ إظهار الرسالة بعد النجاح
+      Snack_Bar(context, 'تم حفظ التعديلات بنجاح', color: Colors.green);
+
+      popRoute(context);
+    } catch (e) {
+      debugPrint('❌ Update Error: $e');
+      // يمكنك عرض رسالة خطأ هنا إن أردت:
+      Snack_Bar(context, 'حدث خطأ أثناء الحفظ', color: Colors.red);
+      rethrow;
     }
   }
 
