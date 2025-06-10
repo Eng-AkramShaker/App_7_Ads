@@ -15,25 +15,25 @@ class BuildSocialMedialIconsRow extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            open_web('https://www.facebook.com/profile.php?id=61559610145593&mibextid=ZbWKwL');
+            open_web('https://www.facebook.com/profile.php?id=61559610145593&sk=about');
           },
           child: CircleAvatar(backgroundColor: Colors.white, radius: 25, child: Image.asset('assets/images/face.png')),
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: 20),
         InkWell(
             onTap: () {
               open_web('https://www.instagram.com/canaryapp.eg?igsh=N210aHE1dnN6YWc1');
             },
             child: CircleAvatar(
                 backgroundColor: Colors.white, radius: 25, child: Image.asset('assets/images/inst.png', fit: BoxFit.fill))),
-        const SizedBox(width: 8),
+        const SizedBox(width: 20),
         InkWell(
           onTap: () {
             open_web('https://www.youtube.com/@app.canary');
           },
           child: CircleAvatar(backgroundColor: Colors.red, radius: 25, child: Image.asset('assets/images/you.png')),
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: 20),
         InkWell(
           onTap: () {
             open_web(
@@ -42,12 +42,12 @@ class BuildSocialMedialIconsRow extends StatelessWidget {
           child:
               CircleAvatar(backgroundColor: Colors.white, radius: 25, child: Image.asset('assets/images/tik.png', fit: BoxFit.fill)),
         ),
-        const SizedBox(width: 8),
-        InkWell(
-            onTap: () {
-              open_web('https://telegram.org/android');
-            },
-            child: CircleAvatar(backgroundColor: Colors.white, radius: 25, child: Image.asset('assets/images/telegram.png'))),
+        const SizedBox(width: 12),
+        // InkWell(
+        //     onTap: () {
+        //       open_web('https://telegram.org/android');
+        //     },
+        //     child: CircleAvatar(backgroundColor: Colors.white, radius: 25, child: Image.asset('assets/images/telegram.png'))),
       ],
     );
   }

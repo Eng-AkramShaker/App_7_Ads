@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:app_7/presentation/screens/auth/controller/auth_controller.dart';
 import 'package:app_7/presentation/screens/more/profile/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:app_7/core/constants/ColorManager.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class EditProfileScreen extends StatefulWidget {
