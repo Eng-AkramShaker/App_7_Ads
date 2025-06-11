@@ -2,12 +2,13 @@
 
 import 'dart:async';
 import 'dart:math';
-
 import 'package:app_7/core/constants/navigators.dart';
+import 'package:app_7/presentation/screens/auth/controller/auth_controller.dart';
 import 'package:app_7/presentation/screens/auth/screens/sign_In_screen.dart';
 import 'package:app_7/presentation/screens/auth/screens/sign_up_screen.dart';
 import 'package:app_7/presentation/screens/home/screens/home.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   static String routeName = 'splash';
@@ -27,12 +28,12 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   void initState() {
     timer = Timer(
-      const Duration(seconds: 3),
+      const Duration(seconds: 2),
       () {
         // pushAndRemoveUntil(context, Home());
-        pushAndRemoveUntil(context, Sign_in_Screen());
+        final proAuth = Provider.of<Auth_Controller>(context, listen: false);
 
-        // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => const Home()));
+        proAuth.checkLoginStatus(context);
       },
     );
 

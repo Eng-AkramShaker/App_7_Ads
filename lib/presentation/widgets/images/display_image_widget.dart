@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 Widget custom_img(String? imageFile) {
   return Center(
     child: imageFile == null || imageFile.isEmpty
-        ? Image.asset(
-            "assets/images/empty.jpg",
-            height: 80,
-            fit: BoxFit.fill,
-          )
+        ? Image.asset("assets/images/empty.jpg", height: 80, fit: BoxFit.fill)
         : Image.network(
             imageFile,
             height: 80,

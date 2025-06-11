@@ -213,9 +213,14 @@ class HomePageState extends State<HomePage> {
                               proCart.update_Favourites(proCart.List_Values_Ads[actualIndex]['id'],
                                   proCart.List_Values_Ads[actualIndex]['action_favourier']);
                             },
-                            imageUrls: proCart.List_Values_Ads[actualIndex]['imageUrls'][0],
+                            imageUrls: (proCart.List_Values_Ads.isNotEmpty &&
+                                    actualIndex < proCart.List_Values_Ads.length &&
+                                    proCart.List_Values_Ads[actualIndex]['imageUrls'] is List &&
+                                    (proCart.List_Values_Ads[actualIndex]['imageUrls'] as List).isNotEmpty)
+                                ? proCart.List_Values_Ads[actualIndex]['imageUrls'][0]
+                                : "",
                             price: proCart.List_Values_Ads[actualIndex]['price'] ?? "",
-                            location: proCart.List_Values_Ads[actualIndex]['location'] ?? "",
+                            // location: proCart.List_Values_Ads[actualIndex]['location'] ?? "",
                             description: proCart.List_Values_Ads[actualIndex]['description'] ?? "",
                             action_color: actionFavourier == 'true' ? Colors.red : Colors.grey,
                             date: proCart.List_Values_Ads[actualIndex]['date'] ?? "",

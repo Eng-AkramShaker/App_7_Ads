@@ -54,8 +54,11 @@ class Auth_Controller extends ChangeNotifier {
     if (value == null || value.isEmpty) {
       return 'البريد الإلكتروني مطلوب';
     }
-    if (!RegExp(r'^[a-zA-Z0-9.@]+$').hasMatch(value)) {
-      return 'البريد الاكتروني خاطئ';
+
+    final emailRegex = RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+
+    if (!emailRegex.hasMatch(value)) {
+      return 'يرجى إدخال بريد إلكتروني صالح';
     }
 
     return null;
@@ -115,10 +118,7 @@ class Auth_Controller extends ChangeNotifier {
 
   //  Sign In  ============================================
 
-  Future<String?> Sign_In(BuildContext context, String email, String password, GlobalKey<FormState> formKey) async {
-    if (formKey.currentState == null || !formKey.currentState!.validate()) {
-      return null;
-    }
+  Future<String?> Sign_In(BuildContext context, String email, String password) async {
     isLoding = true;
 
     try {
@@ -194,6 +194,38 @@ class Auth_Controller extends ChangeNotifier {
     }
 
     return null;
+  }
+
+  //  check Login Status  ============================================
+
+  Future<void> checkLoginStatus(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedUID = prefs.getString('uid');
+    final savedEmail = prefs.getString('email');
+
+    if (savedUID != null && savedEmail != null) {
+      try {
+        // محاولة جلب بيانات المستخدم من Firestore
+        final userData = await FirebaseFirestore.instance.collection('users').doc(savedUID).get();
+
+        if (userData.exists) {
+          final data = userData.data();
+          user = await User_Model.fromMap(data!, savedUID);
+
+          // ✅ التنقل إلى الصفحة الرئيسية
+          pushAndRemoveUntil(context, const Home());
+        } else {
+          // 🚫 لا توجد بيانات للمستخدم → الرجوع إلى شاشة تسجيل الدخول
+          pushAndRemoveUntil(context, const Sign_in_Screen());
+        }
+      } catch (e) {
+        debugPrint("❌ خطأ أثناء التحقق من بيانات المستخدم: $e");
+        pushAndRemoveUntil(context, const Sign_in_Screen());
+      }
+    } else {
+      // 🚫 لا يوجد مستخدم محفوظ → شاشة تسجيل الدخول
+      pushAndRemoveUntil(context, const Sign_in_Screen());
+    }
   }
 
   //  Sign Up  ============================================

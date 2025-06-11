@@ -111,9 +111,11 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                                 );
                               },
                               action_color: ColorManager.redColor,
-                              imageUrls: data[index]['imageUrls'][0],
+                              imageUrls: (data[index]['imageUrls'] != null && data[index]['imageUrls'].isNotEmpty)
+                                  ? data[index]['imageUrls'][0]
+                                  : '',
                               price: data[index]['price'],
-                              location: data[index]['location'],
+                              // location: data[index]['location'],
                               description: data[index]['description'],
                               date: data[index]['date'],
                               city: data[index]['selectedValue_City'],

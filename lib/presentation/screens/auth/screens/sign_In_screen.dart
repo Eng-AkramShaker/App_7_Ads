@@ -6,6 +6,7 @@ import 'package:app_7/core/constants/navigators.dart';
 import 'package:app_7/presentation/screens/auth/controller/auth_controller.dart';
 import 'package:app_7/presentation/screens/auth/screens/forgot_password_screen.dart';
 import 'package:app_7/presentation/screens/auth/screens/sign_up_screen.dart';
+import 'package:app_7/presentation/screens/more/terms_use/terms_use_screen.dart';
 import 'package:app_7/presentation/widgets/custom_tex2.dart';
 import 'package:app_7/presentation/widgets/text_field/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -41,9 +42,9 @@ class _Sign_in_ScreenState extends State<Sign_in_Screen> with SingleTickerProvid
                       children: [
                         Container(
                           width: width_media(context),
-                          height: 300,
+                          height: 280,
                           decoration: BoxDecoration(
-                            color: theme.brightness == Brightness.light ? const Color(0xffF5F5F5) : Colors.black,
+                            color: Colors.white,
                             image: const DecorationImage(
                               image: AssetImage("assets/images/logo.png"),
                             ),
@@ -56,8 +57,8 @@ class _Sign_in_ScreenState extends State<Sign_in_Screen> with SingleTickerProvid
                         width: width_media(context),
                         height: height_media(context),
                         decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
+                          color: Colors.grey[100],
+                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -122,8 +123,8 @@ class _Sign_in_ScreenState extends State<Sign_in_Screen> with SingleTickerProvid
                                             "اذا نسيت كلمه المرور . ",
                                             style: TextStyle(
                                                 fontSize: 13,
-                                                fontWeight: FontWeight.w400,
-                                                color: theme.brightness == Brightness.light ? Colors.grey : Colors.white),
+                                                fontWeight: FontWeight.bold,
+                                                color: theme.brightness == Brightness.light ? ColorManager.primary : Colors.white),
                                           ),
                                         ),
                                       ),
@@ -138,10 +139,10 @@ class _Sign_in_ScreenState extends State<Sign_in_Screen> with SingleTickerProvid
                                         onPressed: () async {
                                           //
 
-                                          await proAuth.Sign_In(context, proAuth.email.text, proAuth.password.text, formKey_Sign_in);
+                                          await proAuth.Sign_In(context, proAuth.email.text, proAuth.password.text);
                                         },
                                         child: Text("تسجيل الدخول",
-                                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white)),
+                                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
                                       ),
                                       //
                                     ],
@@ -163,36 +164,42 @@ class _Sign_in_ScreenState extends State<Sign_in_Screen> with SingleTickerProvid
                                     style: TextStyle(
                                         color: ColorManager.primary,
                                         decoration: TextDecoration.underline,
+                                        fontWeight: FontWeight.bold,
                                         decorationColor: ColorManager.primary),
                                   ),
                                 ),
 
                                 const SizedBox(height: 20),
 
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      ' سياسة و شروط الإستخدام',
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w400,
-                                        decoration: TextDecoration.underline,
-                                        color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                                InkWell(
+                                  onTap: () {
+                                    pushNewScreen(context, terms_useScreen());
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        ' سياسة و شروط الإستخدام',
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w400,
+                                          decoration: TextDecoration.underline,
+                                          color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      'عند المتابعة، يعني موافقتك علي ',
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w400,
-                                        color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                                      const SizedBox(
+                                        width: 10,
                                       ),
-                                    ),
-                                  ],
+                                      Text(
+                                        'عند المتابعة، يعني موافقتك علي ',
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w400,
+                                          color: theme.brightness == Brightness.light ? Colors.black : Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 )
                               ],
                             ),

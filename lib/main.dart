@@ -15,10 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  final prefs = await SharedPreferences.getInstance();
-  final isLoggedIn = prefs.getString('uid') != null;
-
-  runApp(MultiProvider(providers: providers, child: MyApp(isLoggedIn: isLoggedIn)));
+  runApp(MultiProvider(providers: providers, child: const MyApp()));
 }
 
 final List<SingleChildWidget> providers = [
@@ -29,26 +26,18 @@ final List<SingleChildWidget> providers = [
 ];
 
 class MyApp extends StatelessWidget {
-  final bool isLoggedIn;
-  const MyApp({super.key, required this.isLoggedIn});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (ctx) => Controller_Home(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          body: isLoggedIn ? Home() : SplashScreen(),
-        ),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const SplashScreen(),
     );
   }
 }
 
 
-
- 
 
 // akram@gmail.com
 

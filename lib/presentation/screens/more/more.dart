@@ -7,6 +7,7 @@ import 'package:app_7/presentation/screens/more/contact%20us/contact_us.dart';
 import 'package:app_7/presentation/screens/more/privacy_policy/privacy_policy_screen.dart';
 import 'package:app_7/presentation/screens/more/profile/screens/profile_screen.dart';
 import 'package:app_7/presentation/screens/more/terms_conditions/terms_conditions_screen.dart';
+import 'package:app_7/presentation/screens/more/terms_use/terms_use_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:motion_tab_bar/MotionTabBarController.dart';
 import 'package:app_7/core/constants/ColorManager.dart';
@@ -52,23 +53,17 @@ class _MoreScreenState extends State<MoreScreen> {
                           SizedBox(height: 30),
                           CircleAvatar(
                             radius: 50.0,
-                            backgroundImage: NetworkImage('https://sisd.gujaratuniversity.ac.in/assets/images/student.jpg'),
+                            backgroundImage: NetworkImage(
+                                proAuth.user!.imageUrl ?? 'https://sisd.gujaratuniversity.ac.in/assets/images/student.jpg'),
                           ),
                           SizedBox(height: 12),
                           Text(
-                            '👋 مرحبااا.',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
+                            ' مرحبااا. 👋',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                           ),
                           Text(
-                            'Akram',
-                            style: TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                            ),
+                            proAuth.user!.username.toString(),
+                            style: TextStyle(fontSize: 22, color: Colors.white),
                           ),
                         ],
                       ),
@@ -120,9 +115,16 @@ class _MoreScreenState extends State<MoreScreen> {
                         pushNewScreen(context, Terms_Conditions_Screen());
                       },
                     ),
+                    ListTile(
+                      leading: Icon(Icons.file_copy_sharp, color: ColorManager.primary),
+                      title: Text('شروط الأستخدام', style: TextStyle(color: ColorManager.primary)),
+                      onTap: () {
+                        pushNewScreen(context, terms_useScreen());
+                      },
+                    ),
 
                     // Create Account or Logout
-                    'akramaboubakersh@gmail.com' != 'akramaboubakersh@gmail.com'
+                    proAuth.user!.uid.isEmpty
                         ? ListTile(
                             leading: Icon(Icons.logout, color: ColorManager.primary),
                             title: Text(

@@ -92,7 +92,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         username: _userNameController.text,
                         email: _emailController.text,
                         phone: _phoneController.text,
-                        imageUrl: proAuth.imageFile!.path,
+                        imageUrl: proAuth.imageFile == null ? "" : proAuth.imageFile!.path,
                       );
                     },
                     child: const Text(

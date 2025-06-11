@@ -64,6 +64,7 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
         icons: const [Icons.more_horiz, Icons.add, Icons.favorite_border, Icons.home],
         badges: [
           null,
+          null,
           Consumer<Cart_Controller>(builder: (context, provider, child) {
             return MotionBadgeWidget(
               text: '${provider.myNumber}',
@@ -72,7 +73,6 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
               size: 20,
             );
           }),
-          null,
           null,
         ],
         tabSize: 50,
