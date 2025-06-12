@@ -5,6 +5,7 @@ import 'package:app_7/presentation/screens/home/controller/cart.dart';
 import 'package:app_7/presentation/screens/home/controller/home_controller.dart';
 import 'package:app_7/presentation/screens/home/widgets/icon_button.dart';
 import 'package:app_7/presentation/widgets/custom_tex2.dart';
+import 'package:app_7/presentation/widgets/images/display_image_widget.dart';
 import 'package:app_7/presentation/widgets/sliders/auto_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:app_7/core/constants/ColorManager.dart';
@@ -142,7 +143,7 @@ class _Ads_ScreenState extends State<Ads_Screen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         buildIconButton(Icons.visibility, num_views ?? '0'),
-        Container(
+        SizedBox(
             height: 70,
             child: Icon_Button(true, Icons.favorite_border, () async {
               //
@@ -162,7 +163,7 @@ class _Ads_ScreenState extends State<Ads_Screen> {
 
               proCart.update_Favourites(widget.id!, widget.action_favourier!);
             })),
-        Container(height: 70, child: Icon_Button(true, Icons.phone, () {})),
+        SizedBox(height: 70, child: Icon_Button(true, Icons.phone, () {})),
       ],
     );
   }
@@ -178,8 +179,8 @@ class _Ads_ScreenState extends State<Ads_Screen> {
               backgroundColor: ColorManager.primary,
               shape: const CircleBorder(),
             ).copyWith(
-              overlayColor: MaterialStateProperty.all(ColorManager.primary),
-              side: MaterialStateProperty.all(
+              overlayColor: WidgetStateProperty.all(ColorManager.primary),
+              side: WidgetStateProperty.all(
                 const BorderSide(color: ColorManager.primary, width: 1.3),
               ),
             ),

@@ -26,6 +26,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "awesome_dialog",
+      "rootUri": "file:///C:/Users/Akramm/AppData/Local/Pub/Cache/hosted/pub.dev/awesome_dialog-2.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///C:/Users/Akramm/AppData/Local/Pub/Cache/hosted/pub.dev/boolean_selector-2.1.1",
       "packageUri": "lib/",
@@ -218,6 +224,12 @@
       "languageVersion": "3.1"
     },
     {
+      "name": "flare_flutter",
+      "rootUri": "file:///C:/Users/Akramm/AppData/Local/Pub/Cache/hosted/pub.dev/flare_flutter-3.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///C:/Src/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -228,12 +240,6 @@
       "rootUri": "file:///C:/Users/Akramm/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_custom_carousel_slider-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
-    },
-    {
-      "name": "flutter_custom_dialog",
-      "rootUri": "file:///C:/Users/Akramm/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_custom_dialog-1.3.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
     },
     {
       "name": "flutter_launcher_icons",
@@ -548,6 +554,12 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "simple_animations",
+      "rootUri": "file:///C:/Users/Akramm/AppData/Local/Pub/Cache/hosted/pub.dev/simple_animations-4.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///C:/Src/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -722,7 +734,7 @@
       "languageVersion": "3.6"
     }
   ],
-  "generated": "2025-06-11T08:02:57.829521Z",
+  "generated": "2025-06-11T18:03:23.111731Z",
   "generator": "pub",
   "generatorVersion": "3.6.1",
   "flutterRoot": "file:///C:/Src/flutter",

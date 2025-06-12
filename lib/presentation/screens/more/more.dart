@@ -2,6 +2,7 @@
 
 import 'package:app_7/core/constants/navigators.dart';
 import 'package:app_7/presentation/screens/auth/controller/auth_controller.dart';
+import 'package:app_7/presentation/screens/home/controller/home_controller.dart';
 import 'package:app_7/presentation/screens/more/about_us/about_us.dart';
 import 'package:app_7/presentation/screens/more/contact%20us/contact_us.dart';
 import 'package:app_7/presentation/screens/more/privacy_policy/privacy_policy_screen.dart';
@@ -27,7 +28,7 @@ class _MoreScreenState extends State<MoreScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Consumer<Auth_Controller>(builder: (context, proAuth, child) {
+    return Consumer2<Auth_Controller, Controller_Home>(builder: (context, proAuth, proHome, child) {
       return Directionality(
         textDirection: TextDirection.rtl,
         child: SizedBox(
@@ -77,7 +78,11 @@ class _MoreScreenState extends State<MoreScreen> {
                     ListTile(
                       leading: Icon(Icons.home, color: ColorManager.primary),
                       title: Text('الرئيسية', style: TextStyle(color: ColorManager.primary)),
-                      onTap: () {},
+                      onTap: () {
+                        setState(() {
+                          proHome.motionTabBarController!.index = 3;
+                        });
+                      },
                     ),
                     ListTile(
                       leading: Icon(Icons.person, color: ColorManager.primary),

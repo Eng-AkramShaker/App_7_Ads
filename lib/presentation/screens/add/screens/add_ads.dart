@@ -15,7 +15,7 @@ import '../controller/add_controller.dart';
 class AddAds extends StatefulWidget {
   final MotionTabBarController controller;
 
-  const AddAds({required this.controller, Key? key}) : super(key: key);
+  const AddAds({required this.controller, super.key});
 
   @override
   _AddAdsState createState() => _AddAdsState();
@@ -198,48 +198,80 @@ class _AddAdsState extends State<AddAds> {
     Snack_Select_Menu(
       context: context,
       button_tex: 'تنزيل الإعلان',
-      widget: Container(
+      widget: SizedBox(
         height: height_media(context) / 2.5,
         child: Consumer<Add_Controller>(builder: (context, proAdd, child) {
-          return Column(
-            children: [
-              CustomText(text: 'إضافة إعلان', fontSize: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  const SizedBox(height: 30),
-                  CustomText(text: 'أنت على وشك تنزيل إعلانك *', fontSize: 13),
-                  const SizedBox(height: 10),
-                  CustomText(text: "سيتم خصم 300 ج.م من رصيد محفظة التطبيق *", fontSize: 13),
-                  const SizedBox(height: 10),
-                  CustomText(text: "إذا كنت تمتلك نقاط يمكنك استبدالها برصيد المحفظة واستخدامها في إعلاناتك *", fontSize: 13),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      CustomText(text: "أوافق علي الشروط والاحكام", fontSize: 13),
-                      Checkbox(
-                        value: proAdd.selectedOption,
-                        activeColor: ColorManager.redColor,
-                        onChanged: (bool? value) {
-                          proAdd.set_SelectedOption(value!);
-                        },
-                      ),
-                    ],
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                const SizedBox(height: 10),
+                Center(
+                  child: CustomText(
+                    text: 'إضافة إعلان',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(height: 10),
-                  CustomText(text: '* ملحوظة ', fontSize: 17),
-                  const SizedBox(height: 10),
-                  CustomText(text: 'سوف يتم مراجعة الإعلان طبقا للشروط والأحكام وإشعارك بالظهور خلال 48 ساعة', fontSize: 13),
-                ],
-              ),
-            ],
+                ),
+                const SizedBox(height: 25),
+
+                // تنبيه رئيسي
+
+                Center(
+                  child: CustomText(
+                    text: 'أنت على وشك تنزيل إعلانك',
+                    fontSize: 13,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const SizedBox(height: 15),
+
+                // النقاط
+                Center(
+                  child: CustomText(
+                    text: "إذا كنت تمتلك نقاط يمكنك استبدالها برصيد المحفظة\nواستخدامها في إعلاناتك",
+                    fontSize: 13,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const SizedBox(height: 15),
+
+                // الشروط والأحكام
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CustomText(text: "أوافق على الشروط والأحكام", fontSize: 13),
+                    Checkbox(
+                      value: proAdd.selectedOption,
+                      activeColor: ColorManager.redColor,
+                      onChanged: (bool? value) {
+                        proAdd.set_SelectedOption(value!);
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+
+                // ملاحظة
+                CustomText(
+                  text: '* ملحوظة',
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: ColorManager.redColor,
+                ),
+                const SizedBox(height: 6),
+                CustomText(
+                  text: 'سوف يتم مراجعة الإعلان طبقاً للشروط والأحكام، وإشعارك بالظهور خلال ٤٨ ساعة.',
+                  fontSize: 13,
+                  textAlign: TextAlign.right,
+                ),
+              ],
+            ),
           );
         }),
       ),
       onPressed: () async {
-        //
-
         proAdd.upload_ALL_Data_to_Firebase(
           context,
           proCart,
@@ -261,4 +293,3 @@ class _AddAdsState extends State<AddAds> {
 }
 
 // ======================================================================
-

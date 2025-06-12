@@ -36,8 +36,8 @@ dependencies:
   intl:
   photo_manager:
 
-  flutter_custom_dialog:
   shared_preferences: ^2.5.3
+  awesome_dialog: ^2.2.1
 
 dev_dependencies:
   flutter_test:
