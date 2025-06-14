@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print, unused_field, sized_box_for_whitespace, camel_case_types, must_be_immutable, non_constant_identifier_names, prefer_const_constructors_in_immutables, use_key_in_widget_constructors, unused_local_variable, use_build_context_synchronously, avoid_unnecessary_containers
 
 import 'package:app_7/presentation/screens/favourites/screens/favourites_screen.dart';
-import 'package:app_7/presentation/screens/more/profile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:motion_tab_bar/MotionBadgeWidget.dart';
 import 'package:motion_tab_bar/MotionTabBar.dart';

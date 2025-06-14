@@ -1,15 +1,12 @@
-// ignore_for_file: camel_case_types, avoid_print, unused_local_variable, non_constant_identifier_names, must_be_immutable
+// ignore_for_file: must_be_immutable, prefer_const_constructors, avoid_print, non_constant_identifier_names, camel_case_types
 
-import 'package:app_7/presentation/screens/add/controller/add_controller.dart';
-import 'package:app_7/presentation/screens/home/controller/cart.dart';
-import 'package:app_7/presentation/screens/home/controller/home_controller.dart';
-import 'package:app_7/presentation/screens/home/widgets/icon_button.dart';
-import 'package:app_7/presentation/widgets/custom_tex2.dart';
-import 'package:app_7/presentation/widgets/images/display_image_widget.dart';
-import 'package:app_7/presentation/widgets/sliders/auto_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:app_7/core/constants/ColorManager.dart';
 import 'package:provider/provider.dart';
+import 'package:app_7/presentation/screens/home/controller/cart.dart';
+import 'package:app_7/presentation/widgets/custom_tex2.dart';
+import 'package:app_7/presentation/widgets/sliders/auto_slider.dart';
+import 'package:app_7/core/constants/ColorManager.dart';
+import 'package:app_7/presentation/screens/home/widgets/icon_button.dart';
 
 class Ads_Screen extends StatefulWidget {
   Map<String, dynamic> list_favourites;
@@ -27,7 +24,6 @@ class Ads_Screen extends StatefulWidget {
   String? description;
   String? note;
   int? num_views;
-
   String? action_favourier;
 
   Ads_Screen({
@@ -55,115 +51,81 @@ class Ads_Screen extends StatefulWidget {
 }
 
 class _Ads_ScreenState extends State<Ads_Screen> {
+  bool isFavourite = false;
+
   @override
   void initState() {
-    ints(context);
     super.initState();
+    isFavourite = widget.action_favourier == 'true';
   }
-
-  ints(context) async {}
 
   @override
   Widget build(BuildContext context) {
-    return Consumer3<Controller_Home, Cart_Controller, Add_Controller>(
-        builder: (BuildContext context, proHome, proCart, proADD, Widget? child) {
-      //
-      return SafeArea(
-        child: Scaffold(
-          appBar: buildAppBar(),
-          body: SingleChildScrollView(
-            child: Padding(
+    return Consumer<Cart_Controller>(
+      builder: (context, proCart, child) {
+        return SafeArea(
+          child: Scaffold(
+            appBar: buildAppBar(),
+            body: SingleChildScrollView(
               padding: const EdgeInsets.all(19),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Auto_Slider(context, h: 300, imageList: widget.imageUrls),
                   const SizedBox(height: 30),
-                  buildActionButtons(proCart, num_views: widget.num_views!),
+                  buildActionButtons(proCart),
                   const SizedBox(height: 30),
-                  buildInfoRow(': السعر', widget.price!),
-                  buildInfoRow(': المدينة', widget.selectedValue_City!),
-                  buildInfoRow(': العلامة التجارية', widget.brand!),
-                  buildInfoRow(': الموديل', widget.model!),
-                  buildInfoRow(': الحالة', widget.select_Status!),
-                  buildInfoRow(': الوصف', widget.description!),
-                  buildInfoRow(': الملحوظة', widget.note!),
-                  const SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      CustomText(
-                        text: 'الإبلاغ عن الإعلان ',
-                        color: ColorManager.primary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17,
-                      ),
-                      Container(
-                          height: 70, width: 80, alignment: Alignment.centerRight, child: Icon_Button(true, Icons.feedback, () {})),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: ColorManager.primary),
-                      borderRadius: BorderRadius.circular(13),
-                      color: Colors.white,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Center(
-                        child: CustomText(
-                          text: 'ساعدنا في الحصول علي مجتمع أفضل !',
-                          color: ColorManager.primary,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                        ),
-                      ),
-                    ),
-                  ),
+                  buildInfoRow(': السعر', widget.price ?? ''),
+                  buildInfoRow(': المدينة', widget.selectedValue_City ?? ''),
+                  buildInfoRow(': العلامة التجارية', widget.brand ?? ''),
+                  buildInfoRow(': الموديل', widget.model ?? ''),
+                  buildInfoRow(': الحالة', widget.select_Status ?? ''),
+                  buildInfoRow(': الوصف', widget.description ?? ''),
+                  buildInfoRow(': الملحوظة', widget.note ?? ''),
                   const SizedBox(height: 30),
                 ],
               ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   AppBar buildAppBar() {
     return AppBar(
-        backgroundColor: Colors.white,
-        title: const Text('صفحة الإعلان', style: TextStyle(color: ColorManager.primary, fontWeight: FontWeight.bold)),
-        centerTitle: true);
+      backgroundColor: Colors.white,
+      title: const Text('صفحة الإعلان', style: TextStyle(color: ColorManager.primary)),
+      centerTitle: true,
+    );
   }
 
-  Widget buildActionButtons(Cart_Controller proCart, {required num_views}) {
+  Widget buildActionButtons(Cart_Controller proCart) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        buildIconButton(Icons.visibility, num_views ?? '0'),
-        SizedBox(
-            height: 70,
-            child: Icon_Button(true, Icons.favorite_border, () async {
-              //
+        buildIconButton(Icons.visibility, widget.num_views ?? 0),
+        const SizedBox(width: 20),
+        Icon_Button(
+          true,
+          isFavourite ? Icons.favorite : Icons.favorite_border,
+          () async {
+            setState(() {
+              isFavourite = !isFavourite;
+            });
 
-              setState(() {
-                final isFavourited = widget.action_favourier == 'true';
-                widget.action_favourier = isFavourited ? 'false' : 'true';
+            await proCart.updateFavoriteStatus(
+              isAdding: isFavourite,
+              adData: widget.list_favourites,
+            );
 
-                if (isFavourited) {
-                  proCart.list_favourites.removeWhere((item) => item['location'] == widget.location);
-                } else {
-                  proCart.list_favourites.add(widget.list_favourites);
-                }
-              });
-
-              proCart.updateNumber(proCart.list_favourites.length);
-
-              proCart.update_Favourites(widget.id!, widget.action_favourier!);
-            })),
-        SizedBox(height: 70, child: Icon_Button(true, Icons.phone, () {})),
+            proCart.updateNumber(proCart.list_favourites.length);
+          },
+        ),
+        const SizedBox(width: 20),
+        Icon_Button(true, Icons.phone, () {
+          // تنفيذ الاتصال أو حوار
+        }),
       ],
     );
   }
@@ -178,27 +140,15 @@ class _Ads_ScreenState extends State<Ads_Screen> {
             style: ElevatedButton.styleFrom(
               backgroundColor: ColorManager.primary,
               shape: const CircleBorder(),
-            ).copyWith(
-              overlayColor: WidgetStateProperty.all(ColorManager.primary),
-              side: WidgetStateProperty.all(
-                const BorderSide(color: ColorManager.primary, width: 1.3),
-              ),
             ),
-            child: Icon(
-              icon,
-              color: ColorManager.w_color,
-            ),
+            child: Icon(icon, color: Colors.white),
           ),
           Positioned(
             left: 0,
             bottom: 0,
             child: Text(
               '$label',
-              style: const TextStyle(
-                color: ColorManager.primary,
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(color: ColorManager.primary, fontSize: 15, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
           ),
@@ -220,29 +170,25 @@ class _Ads_ScreenState extends State<Ads_Screen> {
                 borderRadius: BorderRadius.circular(13),
                 color: Colors.white,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Center(
-                  child: CustomText(
-                    text: value,
-                    color: ColorManager.primary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
+              padding: const EdgeInsets.all(16),
+              child: Center(
+                child: CustomText(
+                  text: value,
+                  color: ColorManager.primary,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
                 ),
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Container(
-              width: 130,
-              alignment: Alignment.centerRight,
-              child: CustomText(
-                text: label,
-                color: ColorManager.primary,
-                fontWeight: FontWeight.bold,
-              ),
+          const SizedBox(width: 10),
+          Container(
+            width: 130,
+            alignment: Alignment.centerRight,
+            child: CustomText(
+              text: label,
+              color: ColorManager.primary,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ],

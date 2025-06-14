@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:app_7/core/constants/ColorManager.dart';
 
 class SearchContainer extends StatelessWidget {
-  const SearchContainer({super.key});
+  final Function(String) onChanged;
+
+  const SearchContainer({super.key, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +16,7 @@ class SearchContainer extends StatelessWidget {
       child: TextField(
         style: const TextStyle(fontSize: 13),
         textAlign: TextAlign.center,
+        onChanged: onChanged, // 🔍 تنفيذ البحث هنا
         decoration: InputDecoration(
           hintText: " ....... البحث ",
           fillColor: ColorManager.w_color,
